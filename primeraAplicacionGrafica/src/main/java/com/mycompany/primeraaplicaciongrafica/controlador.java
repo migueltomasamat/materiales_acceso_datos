@@ -52,7 +52,7 @@ public class controlador {
                 File fichero = vista.selecionarFichero();
                 String ficheroString = leerFichero(fichero);
                 
-                modelo.ejecutarScript(fichero)
+                modelo.ejecutarScript(fichero);
                 
             }
         });
@@ -68,7 +68,7 @@ public class controlador {
         }
     }
     
-    private String leerFichero(File fichero){
+    private static String leerFichero(File fichero){
         String ficheroleido=null;
         
         

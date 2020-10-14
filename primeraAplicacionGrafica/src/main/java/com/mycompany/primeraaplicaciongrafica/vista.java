@@ -5,12 +5,16 @@
  */
 package com.mycompany.primeraaplicaciongrafica;
 
+import static com.mycompany.primeraaplicaciongrafica.Opcion.INSERCION;
+import static com.mycompany.primeraaplicaciongrafica.Opcion.MODIFICACION;
 import java.awt.Component;
 import java.io.File;
+import static java.lang.Integer.parseInt;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -91,41 +95,41 @@ public class vista extends javax.swing.JFrame {
 
         campoLocalidadDepartamento.setEnabled(false);
 
-        org.jdesktop.layout.GroupLayout panelFormularioDepartamentoLayout = new org.jdesktop.layout.GroupLayout(panelFormularioDepartamento);
+        javax.swing.GroupLayout panelFormularioDepartamentoLayout = new javax.swing.GroupLayout(panelFormularioDepartamento);
         panelFormularioDepartamento.setLayout(panelFormularioDepartamentoLayout);
         panelFormularioDepartamentoLayout.setHorizontalGroup(
-            panelFormularioDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 249, Short.MAX_VALUE)
-            .add(panelFormularioDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(panelFormularioDepartamentoLayout.createSequentialGroup()
+            panelFormularioDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 249, Short.MAX_VALUE)
+            .addGroup(panelFormularioDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFormularioDepartamentoLayout.createSequentialGroup()
                     .addContainerGap()
-                    .add(panelFormularioDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(etiquetaLocalidadDepartamento)
-                        .add(campoLocalidadDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 225, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(campoIDDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 225, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(etiquetaIDDepartamento)
-                        .add(etiquetaNombreDepartamento)
-                        .add(campoNombreDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 225, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelFormularioDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(etiquetaLocalidadDepartamento)
+                        .addComponent(campoLocalidadDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campoIDDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(etiquetaIDDepartamento)
+                        .addComponent(etiquetaNombreDepartamento)
+                        .addComponent(campoNombreDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelFormularioDepartamentoLayout.setVerticalGroup(
-            panelFormularioDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
-            .add(panelFormularioDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(panelFormularioDepartamentoLayout.createSequentialGroup()
-                    .add(9, 9, 9)
-                    .add(etiquetaIDDepartamento)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(campoIDDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(etiquetaNombreDepartamento)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(campoNombreDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(etiquetaLocalidadDepartamento)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(campoLocalidadDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            panelFormularioDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelFormularioDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFormularioDepartamentoLayout.createSequentialGroup()
+                    .addGap(9, 9, 9)
+                    .addComponent(etiquetaIDDepartamento)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(campoIDDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(etiquetaNombreDepartamento)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(campoNombreDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(etiquetaLocalidadDepartamento)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(campoLocalidadDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         botonInsertarDepartamento.setText("Insertar");
@@ -144,34 +148,34 @@ public class vista extends javax.swing.JFrame {
 
         botonBorrarDepartamento.setText("Borrar");
 
-        org.jdesktop.layout.GroupLayout panelAccionesDepartamentoLayout = new org.jdesktop.layout.GroupLayout(panelAccionesDepartamento);
+        javax.swing.GroupLayout panelAccionesDepartamentoLayout = new javax.swing.GroupLayout(panelAccionesDepartamento);
         panelAccionesDepartamento.setLayout(panelAccionesDepartamentoLayout);
         panelAccionesDepartamentoLayout.setHorizontalGroup(
-            panelAccionesDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelAccionesDepartamentoLayout.createSequentialGroup()
+            panelAccionesDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAccionesDepartamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelAccionesDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(botonInsertarDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(botonBorrarDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addGroup(panelAccionesDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonInsertarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(botonBorrarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .add(panelAccionesDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(panelAccionesDepartamentoLayout.createSequentialGroup()
+            .addGroup(panelAccionesDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAccionesDepartamentoLayout.createSequentialGroup()
                     .addContainerGap()
-                    .add(botonActualizarDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(botonActualizarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         panelAccionesDepartamentoLayout.setVerticalGroup(
-            panelAccionesDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelAccionesDepartamentoLayout.createSequentialGroup()
-                .add(20, 20, 20)
-                .add(botonInsertarDepartamento)
-                .add(58, 58, 58)
-                .add(botonBorrarDepartamento)
-                .addContainerGap(25, Short.MAX_VALUE))
-            .add(panelAccionesDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(panelAccionesDepartamentoLayout.createSequentialGroup()
-                    .add(64, 64, 64)
-                    .add(botonActualizarDepartamento)
+            panelAccionesDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAccionesDepartamentoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(botonInsertarDepartamento)
+                .addGap(58, 58, 58)
+                .addComponent(botonBorrarDepartamento)
+                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(panelAccionesDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAccionesDepartamentoLayout.createSequentialGroup()
+                    .addGap(64, 64, 64)
+                    .addComponent(botonActualizarDepartamento)
                     .addContainerGap(64, Short.MAX_VALUE)))
         );
 
@@ -183,28 +187,28 @@ public class vista extends javax.swing.JFrame {
 
         botonUltimoDepartamento.setText(">|");
 
-        org.jdesktop.layout.GroupLayout panelMoverseDepartamentoLayout = new org.jdesktop.layout.GroupLayout(panelMoverseDepartamento);
+        javax.swing.GroupLayout panelMoverseDepartamentoLayout = new javax.swing.GroupLayout(panelMoverseDepartamento);
         panelMoverseDepartamento.setLayout(panelMoverseDepartamentoLayout);
         panelMoverseDepartamentoLayout.setHorizontalGroup(
-            panelMoverseDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelMoverseDepartamentoLayout.createSequentialGroup()
+            panelMoverseDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMoverseDepartamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(botonPrincipioDepartamento)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(botonAnteriorDepartamento)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(botonSiguienteDepartamento)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(botonUltimoDepartamento)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonPrincipioDepartamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonAnteriorDepartamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonSiguienteDepartamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonUltimoDepartamento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMoverseDepartamentoLayout.setVerticalGroup(
-            panelMoverseDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelMoverseDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                .add(botonPrincipioDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(botonAnteriorDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(botonSiguienteDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(botonUltimoDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            panelMoverseDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMoverseDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(botonPrincipioDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonAnteriorDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonSiguienteDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonUltimoDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botonAceptarDepartamento.setText("Aceptar");
@@ -216,76 +220,73 @@ public class vista extends javax.swing.JFrame {
 
         botonCancelarDepartamento.setText("Cancelar");
 
-        org.jdesktop.layout.GroupLayout panelAceptarCancelarDepartamentoLayout = new org.jdesktop.layout.GroupLayout(panelAceptarCancelarDepartamento);
+        javax.swing.GroupLayout panelAceptarCancelarDepartamentoLayout = new javax.swing.GroupLayout(panelAceptarCancelarDepartamento);
         panelAceptarCancelarDepartamento.setLayout(panelAceptarCancelarDepartamentoLayout);
         panelAceptarCancelarDepartamentoLayout.setHorizontalGroup(
-            panelAceptarCancelarDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelAceptarCancelarDepartamentoLayout.createSequentialGroup()
+            panelAceptarCancelarDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAceptarCancelarDepartamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(botonAceptarDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 101, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(botonCancelarDepartamento)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonAceptarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonCancelarDepartamento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelAceptarCancelarDepartamentoLayout.setVerticalGroup(
-            panelAceptarCancelarDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelAceptarCancelarDepartamentoLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(panelAceptarCancelarDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(botonAceptarDepartamento)
-                    .add(botonCancelarDepartamento))
+            panelAceptarCancelarDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAceptarCancelarDepartamentoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelAceptarCancelarDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonAceptarDepartamento)
+                    .addComponent(botonCancelarDepartamento))
                 .addContainerGap())
         );
 
-        org.jdesktop.layout.GroupLayout panelGlobalDepartamentoLayout = new org.jdesktop.layout.GroupLayout(panelGlobalDepartamento);
+        javax.swing.GroupLayout panelGlobalDepartamentoLayout = new javax.swing.GroupLayout(panelGlobalDepartamento);
         panelGlobalDepartamento.setLayout(panelGlobalDepartamentoLayout);
         panelGlobalDepartamentoLayout.setHorizontalGroup(
-            panelGlobalDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelGlobalDepartamentoLayout.createSequentialGroup()
+            panelGlobalDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGlobalDepartamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelGlobalDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelGlobalDepartamentoLayout.createSequentialGroup()
-                        .add(panelMoverseDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(41, 41, 41)
-                        .add(panelAceptarCancelarDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .add(panelGlobalDepartamentoLayout.createSequentialGroup()
-                        .add(panelFormularioDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(panelAccionesDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(143, 143, 143))
+                .addGroup(panelGlobalDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlobalDepartamentoLayout.createSequentialGroup()
+                        .addComponent(panelFormularioDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelAccionesDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83))
+                    .addGroup(panelGlobalDepartamentoLayout.createSequentialGroup()
+                        .addComponent(panelMoverseDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelAceptarCancelarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelGlobalDepartamentoLayout.setVerticalGroup(
-            panelGlobalDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelGlobalDepartamentoLayout.createSequentialGroup()
+            panelGlobalDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGlobalDepartamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelGlobalDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(panelAccionesDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(panelFormularioDepartamento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .add(panelGlobalDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelGlobalDepartamentoLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(panelMoverseDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(87, 87, 87))
-                    .add(panelGlobalDepartamentoLayout.createSequentialGroup()
-                        .add(15, 15, 15)
-                        .add(panelAceptarCancelarDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(panelGlobalDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panelAccionesDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelFormularioDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelGlobalDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelMoverseDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelAceptarCancelarDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
 
-        org.jdesktop.layout.GroupLayout panelPestanyaDepartamentoLayout = new org.jdesktop.layout.GroupLayout(panelPestanyaDepartamento);
+        javax.swing.GroupLayout panelPestanyaDepartamentoLayout = new javax.swing.GroupLayout(panelPestanyaDepartamento);
         panelPestanyaDepartamento.setLayout(panelPestanyaDepartamentoLayout);
         panelPestanyaDepartamentoLayout.setHorizontalGroup(
-            panelPestanyaDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelPestanyaDepartamentoLayout.createSequentialGroup()
-                .add(29, 29, 29)
-                .add(panelGlobalDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 520, Short.MAX_VALUE)
-                .add(216, 216, 216))
+            panelPestanyaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPestanyaDepartamentoLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(panelGlobalDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPestanyaDepartamentoLayout.setVerticalGroup(
-            panelPestanyaDepartamentoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelPestanyaDepartamentoLayout.createSequentialGroup()
-                .add(panelGlobalDepartamento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 279, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 35, Short.MAX_VALUE))
+            panelPestanyaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPestanyaDepartamentoLayout.createSequentialGroup()
+                .addComponent(panelGlobalDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 49, Short.MAX_VALUE))
         );
 
         ventanaPestanyas.addTab("Departamentos", panelPestanyaDepartamento);
@@ -304,63 +305,63 @@ public class vista extends javax.swing.JFrame {
         botonEjecutarEjecutarScript.setText("Ejecutar Script");
         botonEjecutarEjecutarScript.setEnabled(false);
 
-        org.jdesktop.layout.GroupLayout pestanyaScriptsLayout = new org.jdesktop.layout.GroupLayout(pestanyaScripts);
+        javax.swing.GroupLayout pestanyaScriptsLayout = new javax.swing.GroupLayout(pestanyaScripts);
         pestanyaScripts.setLayout(pestanyaScriptsLayout);
         pestanyaScriptsLayout.setHorizontalGroup(
-            pestanyaScriptsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pestanyaScriptsLayout.createSequentialGroup()
+            pestanyaScriptsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pestanyaScriptsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(pestanyaScriptsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1)
-                    .add(pestanyaScriptsLayout.createSequentialGroup()
-                        .add(0, 270, Short.MAX_VALUE)
-                        .add(botonCargarScriptEjecutarScript)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(botonEjecutarEjecutarScript)))
+                .addGroup(pestanyaScriptsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(pestanyaScriptsLayout.createSequentialGroup()
+                        .addGap(0, 342, Short.MAX_VALUE)
+                        .addComponent(botonCargarScriptEjecutarScript)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonEjecutarEjecutarScript)))
                 .addContainerGap())
         );
         pestanyaScriptsLayout.setVerticalGroup(
-            pestanyaScriptsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pestanyaScriptsLayout.createSequentialGroup()
+            pestanyaScriptsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pestanyaScriptsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pestanyaScriptsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(botonCargarScriptEjecutarScript)
-                    .add(botonEjecutarEjecutarScript))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pestanyaScriptsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonCargarScriptEjecutarScript)
+                    .addComponent(botonEjecutarEjecutarScript))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         ventanaPestanyas.addTab("Ejecutar Script", pestanyaScripts);
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 564, Short.MAX_VALUE)
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 619, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 314, Short.MAX_VALUE)
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
         );
 
         ventanaPestanyas.addTab("tab3", jPanel2);
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(ventanaPestanyas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 569, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addComponent(ventanaPestanyas)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(ventanaPestanyas)
-                .add(104, 104, 104))
+                .addComponent(ventanaPestanyas)
+                .addGap(104, 104, 104))
         );
 
         pack();
@@ -371,7 +372,7 @@ public class vista extends javax.swing.JFrame {
         LimpiarCampos();
         ActivarCampos();
         
-        op= Opcion.INSERCION;   
+        op= INSERCION;   
         
     }//GEN-LAST:event_botonInsertarDepartamentoActionPerformed
 
@@ -391,7 +392,7 @@ public class vista extends javax.swing.JFrame {
         campoLocalidadDepartamento.setEnabled(true);
         campoNombreDepartamento.setEnabled(true);
         
-        op=Opcion.MODIFICACION;
+        op=MODIFICACION;
     }//GEN-LAST:event_botonActualizarDepartamentoActionPerformed
 
     private void botonCargarScriptEjecutarScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarScriptEjecutarScriptActionPerformed
@@ -449,7 +450,7 @@ public class vista extends javax.swing.JFrame {
     }
     
     private void DesactivarCampos(JPanel panel){
-        for(Component campo: panel.getComponents()){
+        for(var campo: panel.getComponents()){
             if(campo.getClass()==JTextField.class){
                 campo.setEnabled(false);
             }
@@ -457,12 +458,12 @@ public class vista extends javax.swing.JFrame {
     }
     
     public void MostrarMensajeError(String mensajeError){
-        JOptionPane.showMessageDialog(this, "Error: "+mensajeError);
+        showMessageDialog(this, "Error: "+mensajeError);
         
     }
     
     public Departamento recuperarDatosDepartamento(){
-        return new Departamento(Integer.parseInt(campoIDDepartamento.getText()),campoNombreDepartamento.getText() ,campoLocalidadDepartamento.getText());
+        return new Departamento(parseInt(campoIDDepartamento.getText()),campoNombreDepartamento.getText() ,campoLocalidadDepartamento.getText());
     }
 
     public JButton getBotonAceptarDepartamento() {
@@ -482,7 +483,7 @@ public class vista extends javax.swing.JFrame {
     }
     
     public File selecionarFichero(){
-        File ficheroSeleccionado = new JFileChooser().getSelectedFile();
+        var ficheroSeleccionado = new JFileChooser().getSelectedFile();
         return ficheroSeleccionado;
     }
     
