@@ -5,7 +5,7 @@
  */
 package com.mycompany.primeraaplicaciongrafica;
 import com.mycompany.primeraaplicaciongrafica.modelo.*;
-import com.mycompany.primeraaplicaciongrafica.vista.*;
+import com.mycompany.primeraaplicaciongrafica.vistabien.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class controlador {
     
     private static modelo modelo = new modelo();
-    private static vista vista = new vista();
+    private static vistabien vista = new vistabien();
     
     public static void main(String[] args) {
         vista.setVisible(true);
@@ -30,13 +30,13 @@ public class controlador {
             public void actionPerformed(ActionEvent e){
                 
                 
-                if(vista.getOp()==Opcion.INSERCION){
+                if(vista.op==Opcion.INSERCION){
                   try {
                     modelo.guardarDepartamento(vista.recuperarDatosDepartamento());
                   } catch (SQLException ex) {
                     vista.MostrarMensajeError("Inserción no realizada"+ex.getMessage());
                   }  
-                }else if (vista.getOp()==Opcion.MODIFICACION){
+                }else if (vista.op==Opcion.MODIFICACION){
                     try {
                         modelo.modificarDepartamento(vista.recuperarDatosDepartamento());
                     } catch (SQLException ex) {
