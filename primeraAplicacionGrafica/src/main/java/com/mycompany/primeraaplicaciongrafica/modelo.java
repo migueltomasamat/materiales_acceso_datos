@@ -104,10 +104,35 @@ public class modelo {
         return ejecutarScript(new File(rutaFichero));
     }
     
-    public int ejecutarUpdate (String script) throws SQLException{
+    public long ejecutarUpdate (String script) throws SQLException{
         Statement sentencia = conexion.createStatement();
-        return sentencia.executeUpdate(script);
+        return sentencia.executeLargeUpdate(script);
         
+    }
+    
+    public Departamento mostrarDatosDepartamento() throws SQLException{
+        Departamento dep = new Departamento(resultado.getInt("dept_no"), resultado.getString(2), resultado.getString(3));
+        return dep;
+    }
+    
+    public void consultarTodosLosDepartamentos() throws SQLException{
+        resultado=sentencia.executeQuery("SELECT * FROM DEPARTAMENTOS");
+    }
+    
+    public Departamento primerResultado() throws SQLException{
+        resultado.first();
+        return mostrarDatosDepartamento();
+    }
+    
+    public Departamento anteriorResultado() throws SQLException{
+        resultado.previous();
+        return mostrarDatosDepartamento();
+    }
+    public void siguienteResultado() throws SQLException{
+        resultado.next();
+    }
+    public void ultimoResultado() throws SQLException{
+        resultado.last();
     }
     
     

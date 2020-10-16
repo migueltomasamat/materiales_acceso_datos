@@ -66,7 +66,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelAccionesDepartamentos" max="32767" attributes="0"/>
-                          <Component id="panelAceptarCancelarDepartamentos" pref="0" max="32767" attributes="0"/>
+                          <Component id="panelAceptarCancelarDepartamentos" pref="211" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -99,6 +99,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="panelDatosDepartamentoComponentShown"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -365,7 +368,6 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="areaTextoScripts">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                   </Properties>

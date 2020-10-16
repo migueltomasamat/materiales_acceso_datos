@@ -68,6 +68,11 @@ public class vistabien extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelDatosDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Departamento"));
+        panelDatosDepartamento.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                panelDatosDepartamentoComponentShown(evt);
+            }
+        });
 
         etiquetaIDDepartamentos.setText("Id");
 
@@ -220,7 +225,7 @@ public class vistabien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDepartamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelAccionesDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelAceptarCancelarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(panelAceptarCancelarDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 211, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelDepartamentosLayout.setVerticalGroup(
@@ -239,7 +244,6 @@ public class vistabien extends javax.swing.JFrame {
 
         pestanyaDepartamentos.addTab("Departamentos", panelDepartamentos);
 
-        areaTextoScripts.setEditable(false);
         areaTextoScripts.setColumns(20);
         areaTextoScripts.setRows(5);
         jScrollPane1.setViewportView(areaTextoScripts);
@@ -305,6 +309,10 @@ public class vistabien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonCancelarDepartamentosActionPerformed
 
+    private void panelDatosDepartamentoComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelDatosDepartamentoComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelDatosDepartamentoComponentShown
+
     private void ActivarCampos(){
         campoIDDepartamento.setEnabled(true);
         campoNombreDepartamento.setEnabled(true);
@@ -333,6 +341,12 @@ public class vistabien extends javax.swing.JFrame {
     public Departamento recuperarDatosDepartamento(){
         return new Departamento(parseInt(campoIDDepartamento.getText()),campoNombreDepartamento.getText() ,campoLocalizacionDepartamento.getText());
     }
+    
+    public void cargarDatosDepartamento(Departamento dep){
+        campoIDDepartamento.setText(String.valueOf(dep.getId()));
+        campoNombreDepartamento.setText(dep.getNombre());
+        campoLocalizacionDepartamento.setText(dep.getLocalidad());
+    }
 
     public JButton getBotonAceptarDepartamento() {
         return botonAceptarDepartamentos;
@@ -353,7 +367,7 @@ public class vistabien extends javax.swing.JFrame {
     public File selecionarFichero(){
         JFileChooser seleccionador = new JFileChooser();
         seleccionador.showOpenDialog(botonCargarScriptEjecutarScript);
-        File ficheroSeleccionado = seleccionador.getSelectedFile();
+        ficheroSeleccionado = seleccionador.getSelectedFile();
         return ficheroSeleccionado;
     }
 
