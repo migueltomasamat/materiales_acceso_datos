@@ -59,7 +59,14 @@ public class modelo {
     public Connection ConectarBaseDatos() throws SQLException{
         
         conexion=DriverManager.getConnection("jdbc:h2:./Database/database.db","miguel","12345");
+        sentencia=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return conexion;
+    }
+    
+    public void DesconectarBaseDatos() throws SQLException{
+        resultado.close();
+        sentencia.close();
+        conexion.close();
     }
     
     public int guardarDepartamento(Departamento dep) throws SQLException{
@@ -104,9 +111,15 @@ public class modelo {
         return ejecutarScript(new File(rutaFichero));
     }
     
-    public long ejecutarUpdate (String script) throws SQLException{
+    public long ejecutarUpdateLargo (String script) throws SQLException{
         Statement sentencia = conexion.createStatement();
         return sentencia.executeLargeUpdate(script);
+        
+    }
+    
+    public int ejecutarUpdate(String script) throws SQLException{
+        Statement sentencia = conexion.createStatement();
+        return sentencia.executeUpdate(script);
         
     }
     
@@ -117,6 +130,7 @@ public class modelo {
     
     public void consultarTodosLosDepartamentos() throws SQLException{
         resultado=sentencia.executeQuery("SELECT * FROM DEPARTAMENTOS");
+        resultado.first();
     }
     
     public Departamento primerResultado() throws SQLException{
@@ -128,11 +142,13 @@ public class modelo {
         resultado.previous();
         return mostrarDatosDepartamento();
     }
-    public void siguienteResultado() throws SQLException{
+    public Departamento siguienteResultado() throws SQLException{
         resultado.next();
+        return mostrarDatosDepartamento();
     }
-    public void ultimoResultado() throws SQLException{
+    public Departamento ultimoResultado() throws SQLException{
         resultado.last();
+        return mostrarDatosDepartamento();
     }
     
     

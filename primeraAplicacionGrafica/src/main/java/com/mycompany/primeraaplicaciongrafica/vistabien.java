@@ -66,6 +66,13 @@ public class vistabien extends javax.swing.JFrame {
         botonEjecutarScripts = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                formAncestorResized(evt);
+            }
+        });
 
         panelDatosDepartamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Departamento"));
         panelDatosDepartamento.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -76,9 +83,15 @@ public class vistabien extends javax.swing.JFrame {
 
         etiquetaIDDepartamentos.setText("Id");
 
+        campoIDDepartamento.setEnabled(false);
+
+        campoNombreDepartamento.setEnabled(false);
+
         etiquetaNombreDepartamento.setText("Nombre");
 
         etiquetaLocalizacionDepartamento.setText("Localización");
+
+        campoLocalizacionDepartamento.setEnabled(false);
 
         javax.swing.GroupLayout panelDatosDepartamentoLayout = new javax.swing.GroupLayout(panelDatosDepartamento);
         panelDatosDepartamento.setLayout(panelDatosDepartamentoLayout);
@@ -114,8 +127,18 @@ public class vistabien extends javax.swing.JFrame {
         );
 
         botonInsertarDepartamentos.setText("Insertar");
+        botonInsertarDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonInsertarDepartamentosActionPerformed(evt);
+            }
+        });
 
         botonModificarDepartamentos.setText("Modificar");
+        botonModificarDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarDepartamentosActionPerformed(evt);
+            }
+        });
 
         botonBorrarDepartamentos.setText("Borrar");
 
@@ -312,6 +335,26 @@ public class vistabien extends javax.swing.JFrame {
     private void panelDatosDepartamentoComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelDatosDepartamentoComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_panelDatosDepartamentoComponentShown
+
+    private void formAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorResized
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formAncestorResized
+
+    private void botonInsertarDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarDepartamentosActionPerformed
+        // TODO add your handling code here:
+        LimpiarCampos();
+        ActivarCampos();
+       panelAceptarCancelarDepartamentos.setVisible(true);
+       op=Opcion.INSERCION;
+       
+    }//GEN-LAST:event_botonInsertarDepartamentosActionPerformed
+
+    private void botonModificarDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarDepartamentosActionPerformed
+        // TODO add your handling code here:
+        ActivarCampos();
+        panelAceptarCancelarDepartamentos.setVisible(true);
+        op=Opcion.MODIFICACION;
+    }//GEN-LAST:event_botonModificarDepartamentosActionPerformed
 
     private void ActivarCampos(){
         campoIDDepartamento.setEnabled(true);
