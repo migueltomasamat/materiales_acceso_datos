@@ -8,6 +8,8 @@ import com.mycompany.primeraaplicaciongrafica.modelo.*;
 import com.mycompany.primeraaplicaciongrafica.vistabien.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -24,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author matomas
  */
-public class controlador implements ActionListener,WindowListener {
+public class controlador implements ActionListener,WindowListener, ComponentListener {
     
     private static modelo modelo = new modelo();
     private static vistabien vista = new vistabien();
@@ -38,12 +40,14 @@ public class controlador implements ActionListener,WindowListener {
         vista.addWindowListener(this);
         vista.setVisible(true);
         vista.botonAceptarDepartamentos.addActionListener(this);
+        vista.botonCancelarDepartamentos.addActionListener(this);
         vista.botonCargarScriptEjecutarScript.addActionListener(this);
         vista.botonEjecutarScripts.addActionListener(this);
         vista.botonTodoAtrasDepartamentos.addActionListener(this);
         vista.botonTodoAdelanteDepartamentos.addActionListener(this);
         vista.botonAdelanteDepartamentos.addActionListener(this);
         vista.botonAtrasDepartamentos.addActionListener(this);
+        vista.panelInformacion.addComponentListener(this);
         
     }
     
@@ -97,6 +101,19 @@ public class controlador implements ActionListener,WindowListener {
                     } catch (SQLException ex) {
                         vista.MostrarMensajeError("No se ha podido actualizar el departamento: "+ex.getMessage());
                     }
+                }else if (vista.op==Opcion.BORRADO){
+                    try {
+                        modelo.borrarDepartamento(vista.recuperarDatosDepartamento());
+                    } catch (SQLException ex) {
+                        vista.MostrarMensajeError("No se ha podido borrar el departamento"+ex.getMessage());
+                    }
+                    
+                    try {
+                        modelo.consultarTodosLosDepartamentos();
+                        vista.cargarDatosDepartamento(modelo.mostrarDatosDepartamento());
+                    } catch (SQLException ex) {
+                        vista.MostrarMensajeError("No se ha podido cargar el departamento"+ex.getMessage());
+                    }
                 }
         }else if (e.getSource()==vista.botonEjecutarScripts){
             try {
@@ -140,8 +157,27 @@ public class controlador implements ActionListener,WindowListener {
             } catch (SQLException ex) {
                 vista.MostrarMensajeError("No se ha podido cargar el último departamento"+ex.getMessage());
             }
- }
-    }
+            
+        }else if (e.getSource()==vista.botonCancelarDepartamentos){
+            if (vista.op == Opcion.INSERCION){
+                try {
+                    modelo.consultarTodosLosDepartamentos();
+                    vista.cargarDatosDepartamento(modelo.mostrarDatosDepartamento());
+                } catch (SQLException ex) {
+                    vista.MostrarMensajeError("No se ha podido cargar el departamento"+ex.getMessage());
+                }
+            }else if(vista.op==Opcion.MODIFICACION){
+                try {
+                    vista.cargarDatosDepartamento(modelo.mostrarDatosDepartamento());
+                } catch (SQLException ex) {
+                    vista.MostrarMensajeError("No se ha podido cargar el departamento"+ex.getMessage());
+                }
+        
+            }
+            }
+        
+        }
+    
 
     @Override
     public void windowOpened(WindowEvent e) {
@@ -182,6 +218,34 @@ public class controlador implements ActionListener,WindowListener {
 
     @Override
     public void windowDeactivated(WindowEvent e) {
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+        if (e.getSource()==vista.panelInformacion){
+            try {
+                System.out.println("He detectado el evento");
+                vista.cargarInformacionGeneralBD(modelo.getInformacionBD());
+                
+                vista.cargarInformacionTablas(modelo.getInformacionTablas());
+                
+            } catch (SQLException ex) {
+                vista.MostrarMensajeError("No se ha podido obtener la información de la Base de Datos "+ex.getMessage());
+            }
+        }
+        
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
     }
     
     

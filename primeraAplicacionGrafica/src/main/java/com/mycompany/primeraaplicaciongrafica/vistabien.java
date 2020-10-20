@@ -7,11 +7,14 @@ package com.mycompany.primeraaplicaciongrafica;
 
 import java.io.File;
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 enum Opcion {INSERCION,MODIFICACION,BORRADO}
 
@@ -64,6 +67,11 @@ public class vistabien extends javax.swing.JFrame {
         areaTextoScripts = new javax.swing.JTextArea();
         botonCargarScriptEjecutarScript = new javax.swing.JButton();
         botonEjecutarScripts = new javax.swing.JButton();
+        panelInformacion = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaInformacionGeneral = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaInformacionTablas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -141,6 +149,11 @@ public class vistabien extends javax.swing.JFrame {
         });
 
         botonBorrarDepartamentos.setText("Borrar");
+        botonBorrarDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarDepartamentosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAccionesDepartamentosLayout = new javax.swing.GroupLayout(panelAccionesDepartamentos);
         panelAccionesDepartamentos.setLayout(panelAccionesDepartamentosLayout);
@@ -262,7 +275,7 @@ public class vistabien extends javax.swing.JFrame {
                 .addGroup(panelDepartamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelAceptarCancelarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelMoverRegistrosDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         pestanyaDepartamentos.addTab("Departamentos", panelDepartamentos);
@@ -299,10 +312,65 @@ public class vistabien extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCargarScriptEjecutarScript)
                     .addComponent(botonEjecutarScripts))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         pestanyaDepartamentos.addTab("Scripts", jPanel1);
+
+        panelInformacion.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                panelInformacionComponentShown(evt);
+            }
+        });
+
+        tablaInformacionGeneral.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaInformacionGeneral);
+
+        tablaInformacionTablas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tablaInformacionTablas);
+
+        javax.swing.GroupLayout panelInformacionLayout = new javax.swing.GroupLayout(panelInformacion);
+        panelInformacion.setLayout(panelInformacionLayout);
+        panelInformacionLayout.setHorizontalGroup(
+            panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInformacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
+        );
+        panelInformacionLayout.setVerticalGroup(
+            panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInformacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(294, 294, 294))
+        );
+
+        pestanyaDepartamentos.addTab("Información BD", panelInformacion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -330,6 +398,8 @@ public class vistabien extends javax.swing.JFrame {
 
     private void botonCancelarDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarDepartamentosActionPerformed
         // TODO add your handling code here:
+        DesactivarCampos(panelDatosDepartamento);
+        panelAceptarCancelarDepartamentos.setVisible(false);
     }//GEN-LAST:event_botonCancelarDepartamentosActionPerformed
 
     private void panelDatosDepartamentoComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelDatosDepartamentoComponentShown
@@ -355,6 +425,16 @@ public class vistabien extends javax.swing.JFrame {
         panelAceptarCancelarDepartamentos.setVisible(true);
         op=Opcion.MODIFICACION;
     }//GEN-LAST:event_botonModificarDepartamentosActionPerformed
+
+    private void botonBorrarDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarDepartamentosActionPerformed
+        // TODO add your handling code here:
+        panelAceptarCancelarDepartamentos.setVisible(true);
+        op=Opcion.BORRADO;
+    }//GEN-LAST:event_botonBorrarDepartamentosActionPerformed
+
+    private void panelInformacionComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelInformacionComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelInformacionComponentShown
 
     private void ActivarCampos(){
         campoIDDepartamento.setEnabled(true);
@@ -413,6 +493,46 @@ public class vistabien extends javax.swing.JFrame {
         ficheroSeleccionado = seleccionador.getSelectedFile();
         return ficheroSeleccionado;
     }
+    
+    public void cargarInformacionGeneralBD(InfoDB infor){
+        
+        
+        
+        DefaultTableModel dtm = null;
+        String nomcolumnas[] = {"Nombre","Driver","URL","Usuario"};
+        
+        String datos[] = new String[4];
+        
+        dtm = new DefaultTableModel(nomcolumnas, 1);
+        
+        datos[0]= infor.getNombrebd();
+        datos[1]=infor.getDriverbd();
+        datos[2]= infor.getUrlbd();
+        datos[3]=infor.getUsuariobd();
+        
+        dtm.addRow(datos);
+        
+        tablaInformacionGeneral.setModel(dtm);
+    }
+    
+    public void cargarInformacionTablas (ArrayList<InfoTabla> info){
+        DefaultTableModel dtm = null;
+        String nomcolumnas[] = {"Nombre Tabla","Tipo Tabla"};
+        
+        dtm = new DefaultTableModel(nomcolumnas, info.size());
+        
+        for(InfoTabla x: info){
+            String informacion[] = new String[2];
+            
+            informacion[0]=x.getNombreTabla();
+            informacion[1]=x.getTipoTabla();
+            dtm.addRow(informacion);
+        }
+        
+        
+        
+        tablaInformacionTablas.setModel(dtm);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JTextArea areaTextoScripts;
@@ -435,12 +555,17 @@ public class vistabien extends javax.swing.JFrame {
     protected javax.swing.JLabel etiquetaNombreDepartamento;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JScrollPane jScrollPane2;
+    protected javax.swing.JScrollPane jScrollPane3;
     protected javax.swing.JPanel panelAccionesDepartamentos;
     protected javax.swing.JPanel panelAceptarCancelarDepartamentos;
     protected javax.swing.JPanel panelDatosDepartamento;
     protected javax.swing.JPanel panelDepartamentos;
+    protected javax.swing.JPanel panelInformacion;
     protected javax.swing.JPanel panelMoverRegistrosDepartamentos;
     protected javax.swing.JTabbedPane pestanyaDepartamentos;
+    protected javax.swing.JTable tablaInformacionGeneral;
+    protected javax.swing.JTable tablaInformacionTablas;
     // End of variables declaration//GEN-END:variables
 
     protected Opcion op = null;

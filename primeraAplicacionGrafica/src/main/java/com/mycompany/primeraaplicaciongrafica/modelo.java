@@ -7,11 +7,14 @@ package com.mycompany.primeraaplicaciongrafica;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,7 +61,7 @@ public class modelo {
     
     public Connection ConectarBaseDatos() throws SQLException{
         
-        conexion=DriverManager.getConnection("jdbc:h2:./Database/database.db","miguel","12345");
+        conexion=DriverManager.getConnection("jdbc:mysql://192.168.2.102/ad","miguel","leugim");
         sentencia=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return conexion;
     }
@@ -102,6 +105,14 @@ public class modelo {
         
     
     }
+    public int borrarDepartamento (Departamento dep) throws SQLException{
+        String sql ="DELETE FROM departamentos WHERE dept_no=?";
+        PreparedStatement sentencia = conexion.prepareStatement(sql);
+        
+        sentencia.setInt(1, dep.getId());
+        
+        return sentencia.executeUpdate();
+    }
     
     public int ejecutarScript (File fichero){
         return 1;
@@ -129,7 +140,7 @@ public class modelo {
     }
     
     public void consultarTodosLosDepartamentos() throws SQLException{
-        resultado=sentencia.executeQuery("SELECT * FROM DEPARTAMENTOS");
+        resultado=sentencia.executeQuery("SELECT * FROM departamentos");
         resultado.first();
     }
     
@@ -151,6 +162,37 @@ public class modelo {
         return mostrarDatosDepartamento();
     }
     
+    public InfoDB getInformacionBD() throws SQLException{
+        
+        DatabaseMetaData dbmd = conexion.getMetaData();
+        
+        InfoDB informacion= new InfoDB();
+        informacion.setNombrebd(dbmd.getDatabaseProductName());
+        informacion.setDriverbd(dbmd.getDriverName());
+        informacion.setUrlbd(dbmd.getURL());
+        informacion.setUsuariobd(dbmd.getUserName());
+        
+        return informacion;
+        
+    }
+    public ArrayList<InfoTabla> getInformacionTablas() throws SQLException{
+        DatabaseMetaData dbmd = conexion.getMetaData();
+        
+        ArrayList<InfoTabla> informacion = new ArrayList<>();
+                
+        
+        ResultSet rs = dbmd.getTables("ad", null, "%", null);
+        
+        while(rs.next()){
+            informacion.add(new InfoTabla(rs.getString("TABLE_NAME"), rs.getString("TABLE_TYPE")));
+        }
+        
+        
+        return informacion;
+        
+        
+        
+    }
     
     
 }
