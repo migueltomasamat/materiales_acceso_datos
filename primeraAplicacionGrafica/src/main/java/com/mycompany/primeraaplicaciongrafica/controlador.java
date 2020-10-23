@@ -39,6 +39,7 @@ public class controlador implements ActionListener,WindowListener, ComponentList
         }
         vista.addWindowListener(this);
         vista.setVisible(true);
+        vista.botonEjecutarProcedimiento.addActionListener(this);
         vista.botonAceptarDepartamentos.addActionListener(this);
         vista.botonCancelarDepartamentos.addActionListener(this);
         vista.botonCargarScriptEjecutarScript.addActionListener(this);
@@ -48,6 +49,7 @@ public class controlador implements ActionListener,WindowListener, ComponentList
         vista.botonAdelanteDepartamentos.addActionListener(this);
         vista.botonAtrasDepartamentos.addActionListener(this);
         vista.panelInformacion.addComponentListener(this);
+        vista.panelProcedimientos.addComponentListener(this);
         
     }
     
@@ -174,7 +176,9 @@ public class controlador implements ActionListener,WindowListener, ComponentList
                 }
         
             }
-            }
+        }else if (e.getSource()==vista.botonEjecutarProcedimiento){
+            //
+        }
         
         }
     
@@ -239,6 +243,14 @@ public class controlador implements ActionListener,WindowListener, ComponentList
                 
             } catch (SQLException ex) {
                 vista.MostrarMensajeError("No se ha podido obtener la información de la Base de Datos "+ex.getMessage());
+            }
+        }
+        
+        if (e.getSource()==vista.panelProcedimientos){
+            try {
+                vista.cargarInformacionProcedimientos(modelo.getProcedimientos());
+            } catch (SQLException ex) {
+                vista.MostrarMensajeError("No se han podido cargar los procedimientos"+ex.getMessage());
             }
         }
         

@@ -6,6 +6,7 @@
 package com.mycompany.primeraaplicaciongrafica;
 
 import java.io.File;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -13,8 +14,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
+import org.mariadb.jdbc.CallableProcedureStatement;
+import org.mariadb.jdbc.MariaDbConnection;
+import org.mariadb.jdbc.MariaDbProcedureStatement;
+import org.mariadb.jdbc.internal.com.read.resultset.SelectResultSet;
+import org.mariadb.jdbc.internal.util.exceptions.ExceptionFactory;
 
 /**
  *
@@ -189,9 +197,75 @@ public class modelo {
         
         
         return informacion;
+    }
+    
+    public ArrayList<String> getProcedimientos() throws SQLException{
+        ArrayList<String> listaProcedimientos = new ArrayList<>();
+        
+        DatabaseMetaData dbmd = conexion.getMetaData();
+        
+        ResultSet rs = dbmd.getProcedures(null, "ad", "%");
+        
+        while(rs.next()){
+            
+            listaProcedimientos.add(rs.getString("PROCEDURE_NAME"));
+        }
+        
+        return listaProcedimientos;
+    }
+    
+    public int ejecutarProcedimientoSubidaSal (int num_dep, int subida ) throws SQLException{
         
         
+        String sql = "{ call subida_sal (?,?)}"; 
         
+        MariaDbProcedureStatement procedimiento = new MariaDbProcedureStatement(sql,(MariaDbConnection) conexion, "subida_sal", "ad", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ExceptionFactory.INSTANCE);
+        
+        procedimiento.setInt(1, num_dep);
+        procedimiento.setInt(2, subida);
+        int salida = procedimiento.executeUpdate();
+        
+        if (salida == 0){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+    public String ejecutarProcedimientoNombreDep (int num_dep) throws SQLException{
+        
+        String sql = "{ ? call nombre_dep (?)}"; 
+        
+        MariaDbProcedureStatement procedimiento = new MariaDbProcedureStatement(sql,(MariaDbConnection) conexion, "nombre_dep", "ad", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ExceptionFactory.INSTANCE);
+        
+        procedimiento.setInt(2, num_dep);
+        procedimiento.registerOutParameter(1, Types.VARCHAR);
+        
+        procedimiento.execute();
+        
+        String nombre_dep = procedimiento.getString(1);
+        
+        return null;
+
+    }
+    
+    public ArrayList<String> ejecutareProcedimientoDatosDep (int num_dep) throws SQLException{
+        String sql = "{ call datos_dep (?,?,?)}"; 
+        
+        MariaDbProcedureStatement procedimiento = new MariaDbProcedureStatement(sql,(MariaDbConnection) conexion, "datos_dep", "ad", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ExceptionFactory.INSTANCE);
+        
+        procedimiento.setInt(1, num_dep);
+        procedimiento.registerOutParameter(2, Types.VARCHAR);
+        procedimiento.registerOutParameter(3, Types.VARCHAR);
+        
+        procedimiento.execute();
+        
+        ArrayList<String> devolucion = new ArrayList<>();
+        
+        devolucion.add(procedimiento.getString("nom"));
+        devolucion.add(procedimiento.getString("locali"));
+        
+        return devolucion;
     }
     
     

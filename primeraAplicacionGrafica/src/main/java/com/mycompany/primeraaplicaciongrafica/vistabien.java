@@ -8,6 +8,7 @@ package com.mycompany.primeraaplicaciongrafica;
 import java.io.File;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -72,6 +73,10 @@ public class vistabien extends javax.swing.JFrame {
         tablaInformacionGeneral = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaInformacionTablas = new javax.swing.JTable();
+        panelProcedimientos = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        listaProcedimientos = new javax.swing.JList<>();
+        botonEjecutarProcedimiento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -163,8 +168,8 @@ public class vistabien extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelAccionesDepartamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonInsertarDepartamentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonModificarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                    .addComponent(botonBorrarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                    .addComponent(botonModificarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(botonBorrarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelAccionesDepartamentosLayout.setVerticalGroup(
@@ -261,7 +266,7 @@ public class vistabien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDepartamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelAccionesDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelAceptarCancelarDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 211, Short.MAX_VALUE))
+                    .addComponent(panelAceptarCancelarDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 214, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelDepartamentosLayout.setVerticalGroup(
@@ -275,7 +280,7 @@ public class vistabien extends javax.swing.JFrame {
                 .addGroup(panelDepartamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelAceptarCancelarDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelMoverRegistrosDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pestanyaDepartamentos.addTab("Departamentos", panelDepartamentos);
@@ -297,7 +302,7 @@ public class vistabien extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 373, Short.MAX_VALUE)
+                        .addGap(0, 376, Short.MAX_VALUE)
                         .addComponent(botonCargarScriptEjecutarScript)
                         .addGap(18, 18, 18)
                         .addComponent(botonEjecutarScripts)))
@@ -312,7 +317,7 @@ public class vistabien extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCargarScriptEjecutarScript)
                     .addComponent(botonEjecutarScripts))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pestanyaDepartamentos.addTab("Scripts", jPanel1);
@@ -356,7 +361,7 @@ public class vistabien extends javax.swing.JFrame {
             .addGroup(panelInformacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
                 .addContainerGap())
         );
@@ -372,20 +377,52 @@ public class vistabien extends javax.swing.JFrame {
 
         pestanyaDepartamentos.addTab("Información BD", panelInformacion);
 
+        listaProcedimientos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { " " };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(listaProcedimientos);
+
+        botonEjecutarProcedimiento.setText("Ejecutar Procedimiento");
+
+        javax.swing.GroupLayout panelProcedimientosLayout = new javax.swing.GroupLayout(panelProcedimientos);
+        panelProcedimientos.setLayout(panelProcedimientosLayout);
+        panelProcedimientosLayout.setHorizontalGroup(
+            panelProcedimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProcedimientosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelProcedimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonEjecutarProcedimiento)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelProcedimientosLayout.setVerticalGroup(
+            panelProcedimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProcedimientosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(botonEjecutarProcedimiento)
+                .addGap(20, 20, 20))
+        );
+
+        pestanyaDepartamentos.addTab("Procedimientos", panelProcedimientos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pestanyaDepartamentos)
-                .addContainerGap())
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(pestanyaDepartamentos)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addComponent(pestanyaDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -528,11 +565,20 @@ public class vistabien extends javax.swing.JFrame {
             informacion[1]=x.getTipoTabla();
             dtm.addRow(informacion);
         }
-        
-        
-        
+
         tablaInformacionTablas.setModel(dtm);
     }
+    
+    public void cargarInformacionProcedimientos (ArrayList<String> lista){
+        DefaultListModel dlm = new DefaultListModel();
+        
+        for (String proc: lista){
+            dlm.addElement(proc);
+        }
+        
+        listaProcedimientos.setModel(dlm);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JTextArea areaTextoScripts;
@@ -542,6 +588,7 @@ public class vistabien extends javax.swing.JFrame {
     protected javax.swing.JButton botonBorrarDepartamentos;
     protected javax.swing.JButton botonCancelarDepartamentos;
     protected javax.swing.JButton botonCargarScriptEjecutarScript;
+    protected javax.swing.JButton botonEjecutarProcedimiento;
     protected javax.swing.JButton botonEjecutarScripts;
     protected javax.swing.JButton botonInsertarDepartamentos;
     protected javax.swing.JButton botonModificarDepartamentos;
@@ -557,12 +604,15 @@ public class vistabien extends javax.swing.JFrame {
     protected javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollPane jScrollPane2;
     protected javax.swing.JScrollPane jScrollPane3;
+    protected javax.swing.JScrollPane jScrollPane4;
+    protected javax.swing.JList<String> listaProcedimientos;
     protected javax.swing.JPanel panelAccionesDepartamentos;
     protected javax.swing.JPanel panelAceptarCancelarDepartamentos;
     protected javax.swing.JPanel panelDatosDepartamento;
     protected javax.swing.JPanel panelDepartamentos;
     protected javax.swing.JPanel panelInformacion;
     protected javax.swing.JPanel panelMoverRegistrosDepartamentos;
+    protected javax.swing.JPanel panelProcedimientos;
     protected javax.swing.JTabbedPane pestanyaDepartamentos;
     protected javax.swing.JTable tablaInformacionGeneral;
     protected javax.swing.JTable tablaInformacionTablas;
