@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -42,6 +43,7 @@ public class vistabien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pestanyaDepartamentos = new javax.swing.JTabbedPane();
         panelDepartamentos = new javax.swing.JPanel();
         panelDatosDepartamento = new javax.swing.JPanel();
@@ -77,6 +79,11 @@ public class vistabien extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         listaProcedimientos = new javax.swing.JList<>();
         botonEjecutarProcedimiento = new javax.swing.JButton();
+        panelInformes = new javax.swing.JPanel();
+        botonGenerarInforme = new javax.swing.JButton();
+        rbXML = new javax.swing.JRadioButton();
+        rbHTML = new javax.swing.JRadioButton();
+        rbPDF = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -385,6 +392,11 @@ public class vistabien extends javax.swing.JFrame {
         jScrollPane4.setViewportView(listaProcedimientos);
 
         botonEjecutarProcedimiento.setText("Ejecutar Procedimiento");
+        botonEjecutarProcedimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEjecutarProcedimientoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProcedimientosLayout = new javax.swing.GroupLayout(panelProcedimientos);
         panelProcedimientos.setLayout(panelProcedimientosLayout);
@@ -409,6 +421,50 @@ public class vistabien extends javax.swing.JFrame {
 
         pestanyaDepartamentos.addTab("Procedimientos", panelProcedimientos);
 
+        botonGenerarInforme.setText("Generar Informe");
+
+        buttonGroup1.add(rbXML);
+        rbXML.setText("Informe XML");
+
+        buttonGroup1.add(rbHTML);
+        rbHTML.setText("Informe HTML");
+
+        buttonGroup1.add(rbPDF);
+        rbPDF.setText("Informe PDF");
+
+        javax.swing.GroupLayout panelInformesLayout = new javax.swing.GroupLayout(panelInformes);
+        panelInformes.setLayout(panelInformesLayout);
+        panelInformesLayout.setHorizontalGroup(
+            panelInformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInformesLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(rbXML)
+                .addGap(95, 95, 95)
+                .addGroup(panelInformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInformesLayout.createSequentialGroup()
+                        .addComponent(botonGenerarInforme)
+                        .addContainerGap(264, Short.MAX_VALUE))
+                    .addGroup(panelInformesLayout.createSequentialGroup()
+                        .addComponent(rbHTML)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rbPDF)
+                        .addGap(74, 74, 74))))
+        );
+        panelInformesLayout.setVerticalGroup(
+            panelInformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformesLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(panelInformesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbXML)
+                    .addComponent(rbHTML)
+                    .addComponent(rbPDF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(botonGenerarInforme)
+                .addGap(77, 77, 77))
+        );
+
+        pestanyaDepartamentos.addTab("Informes", panelInformes);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -421,7 +477,7 @@ public class vistabien extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(pestanyaDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -472,6 +528,11 @@ public class vistabien extends javax.swing.JFrame {
     private void panelInformacionComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_panelInformacionComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_panelInformacionComponentShown
+
+    private void botonEjecutarProcedimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarProcedimientoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_botonEjecutarProcedimientoActionPerformed
 
     private void ActivarCampos(){
         campoIDDepartamento.setEnabled(true);
@@ -579,6 +640,36 @@ public class vistabien extends javax.swing.JFrame {
         listaProcedimientos.setModel(dlm);
     }
     
+    public String procedimientoSeleccionado (){
+        return listaProcedimientos.getSelectedValue();
+        
+    }
+    
+    public RetornoProcedimientos retornoSubidaSal(){
+        int num_dep=0;
+        int subida=0; 
+            num_dep= Integer.parseInt(JOptionPane.showInputDialog("Introduce el número de departamento"));
+            subida= Integer.parseInt(JOptionPane.showInputDialog("Introduce la cantidad a subir"));
+        
+        
+        return new RetornoProcedimientos(num_dep, subida);
+    }
+    
+    public RetornoProcedimientos retornoNombreDep(){
+       return new RetornoProcedimientos(Integer.parseInt(JOptionPane.showInputDialog("Introduce el número de departamento")));
+    }
+    
+    public void mostrarResultadoNombreDep(String nom_proc){
+        JOptionPane.showMessageDialog(rootPane, nom_proc);
+    }
+    
+    public RetornoProcedimientos retornoDatosDep(){
+       return new RetornoProcedimientos(Integer.parseInt(JOptionPane.showInputDialog("Introduce el número de departamento")));
+    }
+    
+    public void mostrarRessultadoDatosDep(ArrayList<String> retorno){
+        JOptionPane.showMessageDialog(rootPane, "El nombre del departamento es: "+retorno.get(0)+" localizado en: "+retorno.get(1));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JTextArea areaTextoScripts;
@@ -590,10 +681,12 @@ public class vistabien extends javax.swing.JFrame {
     protected javax.swing.JButton botonCargarScriptEjecutarScript;
     protected javax.swing.JButton botonEjecutarProcedimiento;
     protected javax.swing.JButton botonEjecutarScripts;
+    protected javax.swing.JButton botonGenerarInforme;
     protected javax.swing.JButton botonInsertarDepartamentos;
     protected javax.swing.JButton botonModificarDepartamentos;
     protected javax.swing.JButton botonTodoAdelanteDepartamentos;
     protected javax.swing.JButton botonTodoAtrasDepartamentos;
+    protected javax.swing.ButtonGroup buttonGroup1;
     protected javax.swing.JTextField campoIDDepartamento;
     protected javax.swing.JTextField campoLocalizacionDepartamento;
     protected javax.swing.JTextField campoNombreDepartamento;
@@ -611,9 +704,13 @@ public class vistabien extends javax.swing.JFrame {
     protected javax.swing.JPanel panelDatosDepartamento;
     protected javax.swing.JPanel panelDepartamentos;
     protected javax.swing.JPanel panelInformacion;
+    protected javax.swing.JPanel panelInformes;
     protected javax.swing.JPanel panelMoverRegistrosDepartamentos;
     protected javax.swing.JPanel panelProcedimientos;
     protected javax.swing.JTabbedPane pestanyaDepartamentos;
+    protected javax.swing.JRadioButton rbHTML;
+    protected javax.swing.JRadioButton rbPDF;
+    protected javax.swing.JRadioButton rbXML;
     protected javax.swing.JTable tablaInformacionGeneral;
     protected javax.swing.JTable tablaInformacionTablas;
     // End of variables declaration//GEN-END:variables

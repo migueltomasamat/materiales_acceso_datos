@@ -69,7 +69,7 @@ public class modelo {
     
     public Connection ConectarBaseDatos() throws SQLException{
         
-        conexion=DriverManager.getConnection("jdbc:mysql://192.168.2.102/ad","miguel","leugim");
+        conexion=DriverManager.getConnection("jdbc:mysql://192.168.11.102/ad","miguel","leugim");
         sentencia=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return conexion;
     }
@@ -217,9 +217,9 @@ public class modelo {
     public int ejecutarProcedimientoSubidaSal (int num_dep, int subida ) throws SQLException{
         
         
-        String sql = "{ call subida_sal (?,?)}"; 
+        String sql = "{call subida_sal (?,?) }"; 
         
-        MariaDbProcedureStatement procedimiento = new MariaDbProcedureStatement(sql,(MariaDbConnection) conexion, "subida_sal", "ad", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ExceptionFactory.INSTANCE);
+        CallableStatement procedimiento = conexion.prepareCall(sql);
         
         procedimiento.setInt(1, num_dep);
         procedimiento.setInt(2, subida);
@@ -234,10 +234,9 @@ public class modelo {
     }
     public String ejecutarProcedimientoNombreDep (int num_dep) throws SQLException{
         
-        String sql = "{ ? call nombre_dep (?)}"; 
+        String sql = "{ ? = call nombre_dep (?)}"; 
         
-        MariaDbProcedureStatement procedimiento = new MariaDbProcedureStatement(sql,(MariaDbConnection) conexion, "nombre_dep", "ad", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ExceptionFactory.INSTANCE);
-        
+        CallableStatement procedimiento = conexion.prepareCall(sql);        
         procedimiento.setInt(2, num_dep);
         procedimiento.registerOutParameter(1, Types.VARCHAR);
         
@@ -245,14 +244,14 @@ public class modelo {
         
         String nombre_dep = procedimiento.getString(1);
         
-        return null;
+        return nombre_dep;
 
     }
     
     public ArrayList<String> ejecutareProcedimientoDatosDep (int num_dep) throws SQLException{
         String sql = "{ call datos_dep (?,?,?)}"; 
         
-        MariaDbProcedureStatement procedimiento = new MariaDbProcedureStatement(sql,(MariaDbConnection) conexion, "datos_dep", "ad", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY, ExceptionFactory.INSTANCE);
+        CallableStatement procedimiento = conexion.prepareCall(sql);
         
         procedimiento.setInt(1, num_dep);
         procedimiento.registerOutParameter(2, Types.VARCHAR);

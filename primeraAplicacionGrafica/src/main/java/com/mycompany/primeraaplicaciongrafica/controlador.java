@@ -19,8 +19,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  *
@@ -177,7 +186,78 @@ public class controlador implements ActionListener,WindowListener, ComponentList
         
             }
         }else if (e.getSource()==vista.botonEjecutarProcedimiento){
-            //
+            String procedimientoSeleccionado = vista.procedimientoSeleccionado();
+            RetornoProcedimientos retorno = null;
+            
+            if (procedimientoSeleccionado.equals("subida_sal")){
+                try {
+                    retorno= vista.retornoSubidaSal();
+                    modelo.ejecutarProcedimientoSubidaSal(retorno.getDep(), retorno.getSubida_sal());
+                } catch (SQLException ex) {
+                    vista.MostrarMensajeError("No se ha podido ejecutar el procedimiento"+ex.getMessage());
+                }
+            }
+            else if (procedimientoSeleccionado.equals("nombre_dep")){
+                retorno = vista.retornoNombreDep();
+                try {
+                    vista.mostrarResultadoNombreDep(modelo.ejecutarProcedimientoNombreDep(retorno.getDep()));
+                } catch (SQLException ex) {
+                    vista.MostrarMensajeError("No se ha podido ejecutar el procedimiento nombre_dep\n"+ex.getMessage());
+                }
+            }
+            else if (procedimientoSeleccionado.equals("datos_dep")){
+                try {
+                    vista.mostrarRessultadoDatosDep(modelo.ejecutareProcedimientoDatosDep(vista.retornoDatosDep().getDep()));
+                } catch (SQLException ex) {
+                    vista.MostrarMensajeError("No se ha podido ejecutar el procedimiento datos_dep\n"+ex.getMessage());
+                }
+            }
+        }else if (e.getSource()==vista.botonGenerarInforme){
+            
+            Map<String, Object> parametros = new HashMap<String,Object>();
+            
+            parametros.put("titulo", "Departamentos de Conselleria");
+            parametros.put("autor", "Conselleria d'Educació");
+            parametros.put("fecha", "5/4/2020");
+            
+            JasperReport informe=null;
+            
+            try {
+                informe = JasperCompileManager.compileReport("./plantillaInforme/plantilla.jrxml");
+            } catch (JRException ex) {
+                vista.MostrarMensajeError("Se ha producido un error al compilar el informe"+ex.getMessage());
+            }
+            
+            JasperPrint informeImpreso = null;
+            
+            try {
+                informeImpreso = JasperFillManager.fillReport(informe, parametros, modelo.getConexion());
+            } catch (JRException ex) {
+                vista.MostrarMensajeError("No se ha podido rellenar el informe "+ex.getMessage());
+            }
+            
+            if (vista.rbHTML.isSelected()){
+                try {
+                    JasperExportManager.exportReportToHtmlFile(informeImpreso, "./informeHTML.html");
+                } catch (JRException ex) {
+                    vista.MostrarMensajeError("No se ha podido crear el informe en HTML");
+                }
+            }else if (vista.rbPDF.isSelected()){
+                try {
+                    JasperExportManager.exportReportToPdfFile(informeImpreso, "./informePDF.pdf");
+                } catch (JRException ex) {
+                    vista.MostrarMensajeError("No se ha podido crear el informe en PDF");
+                }
+            }else if (vista.rbPDF.isSelected()){
+                try {
+                    JasperExportManager.exportReportToXmlFile(informeImpreso, "./informeXML.xml",true);
+                } catch (JRException ex) {
+                    vista.MostrarMensajeError("No se ha podido crear el informe en XML");
+                }
+        }
+            
+            
+            
         }
         
         }
