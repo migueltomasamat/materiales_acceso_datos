@@ -69,7 +69,7 @@ public class modelo {
     
     public Connection ConectarBaseDatos() throws SQLException{
         
-        conexion=DriverManager.getConnection("jdbc:mysql://192.168.11.102/ad","miguel","leugim");
+        conexion=DriverManager.getConnection("jdbc:mysql://192.168.2.102/ad","miguel","leugim");
         sentencia=conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return conexion;
     }

@@ -84,6 +84,10 @@ public class vistabien extends javax.swing.JFrame {
         rbXML = new javax.swing.JRadioButton();
         rbHTML = new javax.swing.JRadioButton();
         rbPDF = new javax.swing.JRadioButton();
+        barraMemnuPrincipal = new javax.swing.JMenuBar();
+        itemMenuArchivo = new javax.swing.JMenu();
+        Abrir = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -465,6 +469,19 @@ public class vistabien extends javax.swing.JFrame {
 
         pestanyaDepartamentos.addTab("Informes", panelInformes);
 
+        itemMenuArchivo.setText("Archivo");
+
+        Abrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.META_DOWN_MASK));
+        Abrir.setText("Abrir");
+        itemMenuArchivo.add(Abrir);
+
+        barraMemnuPrincipal.add(itemMenuArchivo);
+
+        jMenu2.setText("Edit");
+        barraMemnuPrincipal.add(jMenu2);
+
+        setJMenuBar(barraMemnuPrincipal);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -477,7 +494,7 @@ public class vistabien extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pestanyaDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -672,7 +689,9 @@ public class vistabien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JMenuItem Abrir;
     protected javax.swing.JTextArea areaTextoScripts;
+    protected javax.swing.JMenuBar barraMemnuPrincipal;
     protected javax.swing.JButton botonAceptarDepartamentos;
     protected javax.swing.JButton botonAdelanteDepartamentos;
     protected javax.swing.JButton botonAtrasDepartamentos;
@@ -693,6 +712,8 @@ public class vistabien extends javax.swing.JFrame {
     protected javax.swing.JLabel etiquetaIDDepartamentos;
     protected javax.swing.JLabel etiquetaLocalizacionDepartamento;
     protected javax.swing.JLabel etiquetaNombreDepartamento;
+    protected javax.swing.JMenu itemMenuArchivo;
+    protected javax.swing.JMenu jMenu2;
     protected javax.swing.JPanel jPanel1;
     protected javax.swing.JScrollPane jScrollPane1;
     protected javax.swing.JScrollPane jScrollPane2;

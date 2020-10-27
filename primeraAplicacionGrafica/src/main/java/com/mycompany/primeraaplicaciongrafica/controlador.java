@@ -59,6 +59,7 @@ public class controlador implements ActionListener,WindowListener, ComponentList
         vista.botonAtrasDepartamentos.addActionListener(this);
         vista.panelInformacion.addComponentListener(this);
         vista.panelProcedimientos.addComponentListener(this);
+        vista.botonGenerarInforme.addActionListener(this);
         
     }
     
