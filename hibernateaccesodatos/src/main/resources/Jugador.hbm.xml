@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="es.iespacomolla.ad.hibernateaccesodatos.Jugador" table="jugador">
+        <id name="id" type="int" column="codigo_jug">
+            <generator class="assigned"/>
+        </id>
+        
+        <property name="nombre" type="string" column="nombre"/>
+        <property name="posicion" type="int" column="posicion"/>
+        <property name="peso" type="double" column="peso"/>
+        <property name="fecha_nac" type="java.util.Date" column="fecha_nac"/>
+        
+        <many-to-one name="equipo" class="es.iespacomolla.ad.hibernateaccesodatos.Equipo" column="codigo_eq_jug" not-null="true"/>
+        
+        <set name="lesiones" cascade="save-update" table="jugador_lesion">
+            <key column="codigo_jug_jl"/>
+            <many-to-many class="es.iespacomolla.ad.hibernateaccesodatos.Lesion" column="codigo_les_jl"/>
+            
+        </set>
+        
+    </class>
+
+
+
+
+
+
+
+
+</hibernate-mapping>

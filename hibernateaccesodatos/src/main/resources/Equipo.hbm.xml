@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="es.iespacomolla.ad.hibernateaccesodatos.Equipo" table="equipo">
+        <id name="id" type="int" column="codigo_eq">
+            <generator class="assigned"/>
+        </id>
+        
+        <property name="nombre" type="string" column="nombre_eq"/>
+        <property name="ciudad" type="string" column="ciudad"/>
+        <property name="division" type="string" column="division"/>
+        <property name="conferencia" type="string" column="conferencia"/>
+        
+        <many-to-one name="entrenador" class="es.iespacomolla.ad.hibernateaccesodatos.Entrenador" cascade="save-update"/>
+        
+        <set name="jugadores" inverse="true" lazy="true" cascade="all" fetch="select">
+            <key column="codigo_eq" not-null="true"/>
+            <one-to-many class="es.iespacomolla.ad.hibernateaccesodatos.Jugador"/>
+            
+        </set>
+        
+    </class>
+
+
+
+
+
+
+
+
+</hibernate-mapping>

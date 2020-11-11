@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="es.iespacomolla.ad.hibernateaccesodatos.Entrenador" table="entrenador">
+        <id name="id" type="int" column="codigo_ent">
+            <generator class="assigned"/>
+        </id>
+        
+        <property name="nombre" type="string" column="nombre"/>
+        <property name="edad" type="int" column="edad"/>
+        
+        <one-to-one name="equipo" class="es.iespacomolla.ad.hibernateaccesodatos.Equipo" property-ref="entrenador"/>
+        
+    </class>
+
+
+
+
+
+
+
+
+</hibernate-mapping>
