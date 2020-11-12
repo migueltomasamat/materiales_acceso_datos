@@ -10,9 +10,9 @@
         <property name="hibernate.connection.password">leugim</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
 
-        <mapping resource="Equipo.hbm.xml" />
+<!--        <mapping resource="Equipo.hbm.xml" />
         <mapping resource="Jugador.hbm.xml" />
         <mapping resource="Lesion.hbm.xml" />
-        <mapping resource="Entrenador.hbm.xml"/>
+        <mapping resource="Entrenador.hbm.xml"/> -->
     </session-factory>
 </hibernate-configuration>

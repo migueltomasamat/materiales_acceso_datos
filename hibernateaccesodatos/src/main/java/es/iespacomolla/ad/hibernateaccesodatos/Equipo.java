@@ -6,21 +6,45 @@
 package es.iespacomolla.ad.hibernateaccesodatos;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author miguel
  */
+@Entity
+@Table(name="entrenador")
 public class Equipo {
     
+    @Id
+    @Column(name="codigo_ent")
     private int id;
+    
+    @Column(name="nombre_eq")
     private String nombre;
+    
+    @Column(name="ciudad")
     private String ciudad;
+    
+    @Column(name="division")
     private String division;
+    
+    @Column(name="conferencia")
     private String conferencia;
     
+    
+    @OneToOne (cascade=CascadeType.ALL)
+    @JoinColumn(name="codigo_ent_eq")
     private Entrenador entrenador;
     
+    @OneToMany(mappedBy="equipo", cascade=CascadeType.ALL)
     private Set<Jugador> jugadores;
 
     public Equipo() {

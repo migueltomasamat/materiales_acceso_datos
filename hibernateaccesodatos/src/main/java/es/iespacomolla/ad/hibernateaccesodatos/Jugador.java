@@ -7,21 +7,51 @@ package es.iespacomolla.ad.hibernateaccesodatos;
 
 import java.util.Date;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author miguel
  */
+
+@Entity
+@Table(name="jugador")
 class Jugador {
     
+    @Id
+    @Column(name="codigo_jug")
     private int id;
+    
+    @Column(name="nombre")
     private String nombre;
+    
+    @Column(name="posicion")
     private int posicion;
+    
+    @Column(name="peso")
     private Double peso;
+    
+    @Column(name="fecha_nac")
     private Date fecha_nac;
     
+    @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name="codigo_eq_jug")
     private Equipo equipo;
     
+    
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="jugador_lesion",
+            joinColumns={@JoinColumn(name="codigo_jug_jl")},
+            inverseJoinColumns={@JoinColumn(name="codigo_les_jl")}
+            )
     private Set<Lesion> lesiones;
 
     public Jugador() {

@@ -21,7 +21,12 @@ public class NewMain {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+        SessionFactory factoria = new Configuration().configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Entrenador.class)
+                .addAnnotatedClass(Equipo.class)
+                .addAnnotatedClass(Jugador.class)
+                .addAnnotatedClass(Lesion.class)
+                .buildSessionFactory();
         
         Session sesion = factoria.openSession();
         

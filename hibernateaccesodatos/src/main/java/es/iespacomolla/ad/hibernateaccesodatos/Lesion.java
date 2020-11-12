@@ -6,17 +6,32 @@
 package es.iespacomolla.ad.hibernateaccesodatos;
 
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author miguel
  */
+@Entity
+@Table(name="lesion")
 class Lesion {
     
+    @Id
+    @Column(name="codigo_les")
     private int id;
+    
+    @Column(name="nombre")
     private String nombre;
+    
+    @Column(name="tiempo_rec")
     private int tiempo_rec;
     
+    
+    @ManyToMany(mappedBy="lesiones")
     Set<Jugador> lesionados;
 
     public Lesion() {
