@@ -19,32 +19,32 @@ import javax.persistence.Table;
  *
  * @author miguel
  */
-@Entity
-@Table(name="entrenador")
+//@Entity
+//@Table(name="entrenador")
 public class Equipo {
     
-    @Id
-    @Column(name="codigo_ent")
+    //@Id
+    //@Column(name="codigo_ent")
     private int id;
     
-    @Column(name="nombre_eq")
+    //@Column(name="nombre_eq")
     private String nombre;
     
-    @Column(name="ciudad")
+    //@Column(name="ciudad")
     private String ciudad;
     
-    @Column(name="division")
+    //@Column(name="division")
     private String division;
     
-    @Column(name="conferencia")
+    //@Column(name="conferencia")
     private String conferencia;
     
     
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name="codigo_ent_eq")
+    //@OneToOne (cascade=CascadeType.ALL)
+    //@JoinColumn(name="codigo_ent_eq")
     private Entrenador entrenador;
     
-    @OneToMany(mappedBy="equipo", cascade=CascadeType.ALL)
+    //@OneToMany(mappedBy="equipo", cascade=CascadeType.ALL)
     private Set<Jugador> jugadores;
 
     public Equipo() {

@@ -17,21 +17,21 @@ import javax.persistence.Table;
  * @author miguel
  */
 
-@Entity
-@Table(name="entrenador")
+//@Entity
+//@Table(name="entrenador")
 public class Entrenador {
     
-    @Id
-    @Column(name="codigo_ent")
+    //@Id
+    //@Column(name="codigo_ent")
     private int id;
     
-    @Column(name="nombre")
+    //@Column(name="nombre")
     private String nombre;
     
-    @Column(name="edad")
+    //@Column(name="edad")
     private int edad;
     
-    @OneToOne(mappedBy="entrenador", cascade={CascadeType.PERSIST,CascadeType.REFRESH})
+    //@OneToOne(mappedBy="entrenador", cascade={CascadeType.PERSIST,CascadeType.REFRESH})
     private Equipo equipo;
 
     public Entrenador() {

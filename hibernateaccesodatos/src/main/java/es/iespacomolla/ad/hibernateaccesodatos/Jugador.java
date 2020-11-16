@@ -22,36 +22,36 @@ import javax.persistence.Table;
  * @author miguel
  */
 
-@Entity
-@Table(name="jugador")
-class Jugador {
+//@Entity
+//@Table(name="jugador")
+public class Jugador {
     
-    @Id
-    @Column(name="codigo_jug")
+    //@Id
+    //@Column(name="codigo_jug")
     private int id;
     
-    @Column(name="nombre")
+    //@Column(name="nombre")
     private String nombre;
     
-    @Column(name="posicion")
+    //@Column(name="posicion")
     private int posicion;
     
-    @Column(name="peso")
+    //@Column(name="peso")
     private Double peso;
     
-    @Column(name="fecha_nac")
+    //@Column(name="fecha_nac")
     private Date fecha_nac;
     
-    @ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name="codigo_eq_jug")
+    //@ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    //@JoinColumn(name="codigo_eq_jug")
     private Equipo equipo;
     
     
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="jugador_lesion",
-            joinColumns={@JoinColumn(name="codigo_jug_jl")},
-            inverseJoinColumns={@JoinColumn(name="codigo_les_jl")}
-            )
+    //@ManyToMany(cascade=CascadeType.ALL)
+    //@JoinTable(name="jugador_lesion",
+    //        joinColumns={@JoinColumn(name="codigo_jug_jl")},
+    //        inverseJoinColumns={@JoinColumn(name="codigo_les_jl")}
+    //        )
     private Set<Lesion> lesiones;
 
     public Jugador() {
