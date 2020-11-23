@@ -14,6 +14,8 @@ import org.hibernate.cfg.Configuration;
  * @author miguel
  */
 public class NewMain {
+    
+    
 
     /**
      * @param args the command line arguments
@@ -33,14 +35,16 @@ public class NewMain {
         */
         
         //Conexión con ficheros de configuración en XML
-        SessionFactory factoria = new Configuration().configure().buildSessionFactory();
+        /*SessionFactory factoria = new Configuration().configure().buildSessionFactory();
         
         Session sesion = factoria.openSession();
         
         if(sesion!=null)
             System.out.println("Se ha conectado");
         else
-            System.out.println("No se ha conectado");
+            System.out.println("No se ha conectado");*/
+        
+
         
         
         

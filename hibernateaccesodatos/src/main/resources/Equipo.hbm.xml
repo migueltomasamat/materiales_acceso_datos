@@ -13,7 +13,7 @@
         <property name="division" type="string" column="division"/>
         <property name="conferencia" type="string" column="conferencia"/>
         
-        <many-to-one name="entrenador" class="es.iespacomolla.ad.hibernateaccesodatos.Entrenador" cascade="save-update"/>
+        <many-to-one name="entrenador" class="es.iespacomolla.ad.hibernateaccesodatos.Entrenador" cascade="save-update" column="codigo_ent_eq"/>
         
         <set name="jugadores" inverse="true" lazy="true" cascade="all" fetch="select">
             <key column="codigo_eq" not-null="true"/>

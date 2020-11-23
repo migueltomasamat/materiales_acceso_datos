@@ -33,9 +33,21 @@ public class DAOImplementacionHibernate implements DAO{
 
     private Session sesion;
     private SessionFactory factory;
-            
-    
-    
+
+    public DAOImplementacionHibernate(Session sesion, SessionFactory factory) {
+        this.sesion = sesion;
+        this.factory = factory;
+    }
+
+    public DAOImplementacionHibernate() {
+        try {
+            crearConexionHibernate();
+        } catch (DAOConexionExcepcion ex) {
+            System.err.println("No se ha podido realizar una conexión a la base de datos con Hibernate");
+        }
+        
+    }
+
     
     private void crearConexionHibernate() throws DAOConexionExcepcion{
         factory= new Configuration().configure().buildSessionFactory();
@@ -404,7 +416,31 @@ public class DAOImplementacionHibernate implements DAO{
         
         List<Jugador> jugadoresMasPesados = q.list();
         
+        
         return new HashSet<Jugador>(jugadoresMasPesados);
     }
+
+    @Override
+    public Set<String> getConferencias() {
+        Query q = sesion.createQuery("select distinct e.conferencia from Equipo e");
+        
+        return new HashSet<>(q.getResultList());
+        
+    }
+
+    @Override
+    public Set<String> getDivisionesEste() {
+        Query q = sesion.createQuery("select distinct e.division from Equipo e where e.conferencia='Este'");
+        
+        return new HashSet<>(q.getResultList());
+    }
+
+    @Override
+    public Set<String> getDivisionesOeste() {
+        Query q = sesion.createQuery("select distinct e.division from Equipo e where e.conferencia='Oeste'");
+        
+        return new HashSet<>(q.getResultList());
+    }
+    
     
 }

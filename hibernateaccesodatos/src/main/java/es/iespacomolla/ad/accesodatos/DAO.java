@@ -29,6 +29,10 @@ public interface DAO {
     Equipo getEquipoPorNombre(String nombreEquipo);
     Set<Equipo> getEquiposConferencia (String nombreConferencia);
     Set<Equipo> getEquiposDivision (String nombreDivision);
+    Set<String> getConferencias();
+    Set<String> getDivisionesEste();
+    Set<String> getDivisionesOeste();
+    
     
     void setEquipo (Equipo eq) throws DAOEquipoExcepcion;
     void deleteEquipo (Equipo eq) throws DAOEquipoExcepcion;
