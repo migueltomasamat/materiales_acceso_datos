@@ -44,6 +44,7 @@ public interface DAO {
     
     
    //Interfaz de persistencia de Jugador
+    Set<Jugador> getTodosLosJugadores();
     int getIdInsertarJugador();
     Jugador getJugador (int idjugador);
     Set<Jugador> getJugador(String nombrejugador);
@@ -58,6 +59,9 @@ public interface DAO {
     //Interfaz de persistencia de Entrenador
     int getIdInsertarEntrenador();
     Entrenador getEntrenador (int identrenador);
+    Entrenador getEntrenadorPorNombre (String nombre);
+    Set<Entrenador> getEntrenadores();
+    Set<Entrenador> getEntrenadoresSinEquipo();
     void setEntrenador (Entrenador ent) throws DAOEntrenadorExcepcion;
     void modifyEntrenador (Entrenador ent) throws DAOEntrenadorExcepcion;
     void deleteEntrenador (Entrenador ent) throws DAOEntrenadorExcepcion;

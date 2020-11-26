@@ -58,7 +58,7 @@ public class DAOImplementacionHibernate implements DAO{
         }
     }
     
-    private void cerraConexionHibernate() throws DAOConexionExcepcion{
+    public void cerraConexionHibernate() throws DAOConexionExcepcion{
         
         sesion.close();
         
@@ -440,6 +440,35 @@ public class DAOImplementacionHibernate implements DAO{
         Query q = sesion.createQuery("select distinct e.division from Equipo e where e.conferencia='Oeste'");
         
         return new HashSet<>(q.getResultList());
+    }
+
+    @Override
+    public Set<Jugador> getTodosLosJugadores() {
+        Query q = sesion.createQuery("from Jugador");
+        
+        return new HashSet<Jugador>(q.list());
+    }
+
+    @Override
+    public Set<Entrenador> getEntrenadores() {
+        Query q = sesion.createQuery("from Entrenador");
+        
+        return new HashSet<Entrenador>(q.list());
+    }
+
+    @Override
+    public Entrenador getEntrenadorPorNombre(String nombre) {
+        Query q = sesion.createQuery("from Entrenador e where e.nombre= :parametroNombreEntrenador");
+        q.setParameter("parametroNombreEntrenador", nombre);
+        
+        return (Entrenador) q.uniqueResult();
+    }
+
+    @Override
+    public Set<Entrenador> getEntrenadoresSinEquipo() {
+        Query q = sesion.createQuery("from Entrenador e where e.id not in (select eq.entrenador.id from Equipo eq)");
+        
+        return new HashSet<Entrenador>(q.list());
     }
     
     

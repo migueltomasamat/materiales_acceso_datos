@@ -5,6 +5,7 @@
  */
 package es.iespacomolla.ad.hibernateaccesodatos;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -40,7 +41,7 @@ public class Jugador {
     private Double peso;
     
     //@Column(name="fecha_nac")
-    private Date fecha_nac;
+    private LocalDate fecha_nac;
     
     //@ManyToOne(cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     //@JoinColumn(name="codigo_eq_jug")
@@ -57,7 +58,7 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(int id, String nombre, int posicion, Double peso, Date fecha_nac, Equipo equipo, Set<Lesion> lesiones) {
+    public Jugador(int id, String nombre, int posicion, Double peso, LocalDate fecha_nac, Equipo equipo, Set<Lesion> lesiones) {
         this.id = id;
         this.nombre = nombre;
         this.posicion = posicion;
@@ -99,11 +100,11 @@ public class Jugador {
         this.peso = peso;
     }
 
-    public Date getFecha_nac() {
+    public LocalDate getFecha_nac() {
         return fecha_nac;
     }
 
-    public void setFecha_nac(Date fecha_nac) {
+    public void setFecha_nac(LocalDate fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
 

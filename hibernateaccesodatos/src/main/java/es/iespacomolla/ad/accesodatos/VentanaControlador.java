@@ -5,25 +5,44 @@
  */
 package es.iespacomolla.ad.accesodatos;
 
+import es.iespacomolla.ad.exceptions.DAOConexionExcepcion;
+import es.iespacomolla.ad.exceptions.DAOEquipoExcepcion;
 import es.iespacomolla.ad.hibernateaccesodatos.Equipo;
+import es.iespacomolla.ad.hibernateaccesodatos.Jugador;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.TabbedPaneUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
+import javax.swing.text.DateFormatter;
+import org.jdesktop.swingx.JXDatePicker;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
  * @author miguel
  */
-public class VentanaControlador extends javax.swing.JFrame {
+public class VentanaControlador extends javax.swing.JFrame implements WindowListener{
 
     /**
      * Creates new form VentanaControlador
@@ -35,6 +54,7 @@ public class VentanaControlador extends javax.swing.JFrame {
               
         panelPestanyas.setUI(uiModificado);
         panelPestanyas.setBackground(Color.WHITE);
+        AutoCompleteDecorator.decorate(comboBusquedaJugador);
         
     }
 
@@ -47,6 +67,7 @@ public class VentanaControlador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
         panelFondo = new javax.swing.JPanel();
         panelLateral = new javax.swing.JPanel();
         botonEquipoLateral = new javax.swing.JButton();
@@ -65,23 +86,50 @@ public class VentanaControlador extends javax.swing.JFrame {
         listaConferenciaEquipos = new javax.swing.JList<>();
         comboSeleccionConferencia = new javax.swing.JComboBox<>();
         panelDetallesEquipo = new javax.swing.JPanel();
-        etiquetaCiudadEquipo = new javax.swing.JLabel();
-        campoCiudadEquipo = new javax.swing.JTextField();
-        etiquetaDivisionEquipo = new javax.swing.JLabel();
-        comboDivisionEquipo = new javax.swing.JComboBox<>();
-        etiquetaConferenciaEquipo = new javax.swing.JLabel();
-        comboConferenciaEquipo = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
         etiquetaModificarEquipo = new javax.swing.JLabel();
         botonModificarEquipo = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        campoCiudadEquipo = new javax.swing.JTextField();
+        comboConferenciaEquipo = new javax.swing.JComboBox<>();
+        etiquetaConferenciaEquipo = new javax.swing.JLabel();
+        comboDivisionEquipo = new javax.swing.JComboBox<>();
         etiquetaNombreEquipo = new javax.swing.JLabel();
+        etiquetaCiudadEquipo = new javax.swing.JLabel();
+        etiquetaDivisionEquipo = new javax.swing.JLabel();
         campoNombreEquipo = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         panelJugadores = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        etiquetaBusquedaJugadores = new javax.swing.JLabel();
+        panelDatosJugadores = new javax.swing.JPanel();
+        etiquetaPosicionJugador = new javax.swing.JLabel();
+        comboPosicionJugador = new javax.swing.JComboBox<>();
+        etiquetaPesoJugador = new javax.swing.JLabel();
+        spinnerPesoJugador = new javax.swing.JSpinner();
+        campoFormateadoFecha = new javax.swing.JFormattedTextField();
+        etiquetaPesoJugador1 = new javax.swing.JLabel();
+        comboBusquedaJugador = new javax.swing.JComboBox<>();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -92,7 +140,7 @@ public class VentanaControlador extends javax.swing.JFrame {
         panelLateral.setBackground(new java.awt.Color(0, 67, 140));
         panelLateral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonEquipoLateral.setBackground(new java.awt.Color(0, 67, 140));
+        botonEquipoLateral.setBackground(new java.awt.Color(218, 26, 50));
         botonEquipoLateral.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         botonEquipoLateral.setForeground(new java.awt.Color(255, 255, 255));
         botonEquipoLateral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoEquipo.png"))); // NOI18N
@@ -102,6 +150,7 @@ public class VentanaControlador extends javax.swing.JFrame {
         botonEquipoLateral.setContentAreaFilled(false);
         botonEquipoLateral.setFocusPainted(false);
         botonEquipoLateral.setIconTextGap(20);
+        botonEquipoLateral.setOpaque(true);
         botonEquipoLateral.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonEquipoLateralMouseEntered(evt);
@@ -254,29 +303,53 @@ public class VentanaControlador extends javax.swing.JFrame {
         panelDetallesEquipo.setBackground(new java.awt.Color(255, 255, 255));
         panelDetallesEquipo.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Equipo"));
 
-        etiquetaCiudadEquipo.setText("Ciudad");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        campoCiudadEquipo.addActionListener(new java.awt.event.ActionListener() {
+        etiquetaModificarEquipo.setBackground(new java.awt.Color(255, 255, 255));
+        etiquetaModificarEquipo.setForeground(new java.awt.Color(218, 26, 50));
+        etiquetaModificarEquipo.setText("* Equipo modificado, almacenar los cambios");
+
+        botonModificarEquipo.setBackground(new java.awt.Color(218, 26, 50));
+        botonModificarEquipo.setText("Almacenar Cambios");
+        botonModificarEquipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(218, 26, 50)));
+        botonModificarEquipo.setBorderPainted(false);
+        botonModificarEquipo.setOpaque(true);
+        botonModificarEquipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCiudadEquipoActionPerformed(evt);
-            }
-        });
-        campoCiudadEquipo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                campoCiudadEquipoPropertyChange(evt);
+                botonModificarEquipoActionPerformed(evt);
             }
         });
 
-        etiquetaDivisionEquipo.setText("División");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonModificarEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(etiquetaModificarEquipo)
+                        .addGap(25, 25, 25)))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(etiquetaModificarEquipo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonModificarEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-        comboDivisionEquipo.setBackground(new java.awt.Color(255, 255, 255));
-        comboDivisionEquipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboDivisionEquipoItemStateChanged(evt);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        campoCiudadEquipo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoCiudadEquipoKeyTyped(evt);
             }
         });
-
-        etiquetaConferenciaEquipo.setText("Conferencia");
 
         comboConferenciaEquipo.setBackground(new java.awt.Color(255, 255, 255));
         comboConferenciaEquipo.addItemListener(new java.awt.event.ItemListener() {
@@ -290,64 +363,55 @@ public class VentanaControlador extends javax.swing.JFrame {
             }
         });
 
-        etiquetaModificarEquipo.setBackground(new java.awt.Color(255, 255, 255));
-        etiquetaModificarEquipo.setForeground(new java.awt.Color(218, 26, 50));
-        etiquetaModificarEquipo.setText("* Equipo modificado, almacenar los cambios");
+        etiquetaConferenciaEquipo.setText("Conferencia");
 
-        botonModificarEquipo.setBackground(new java.awt.Color(218, 26, 50));
-        botonModificarEquipo.setText("Almacenar Cambios");
-        botonModificarEquipo.setBorder(null);
-        botonModificarEquipo.setBorderPainted(false);
-        botonModificarEquipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarEquipoActionPerformed(evt);
+        comboDivisionEquipo.setBackground(new java.awt.Color(255, 255, 255));
+        comboDivisionEquipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboDivisionEquipoItemStateChanged(evt);
             }
         });
 
         etiquetaNombreEquipo.setText("Nombre");
 
-        campoNombreEquipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombreEquipoActionPerformed(evt);
-            }
-        });
-        campoNombreEquipo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                campoNombreEquipoPropertyChange(evt);
+        etiquetaCiudadEquipo.setText("Ciudad");
+
+        etiquetaDivisionEquipo.setText("División");
+
+        campoNombreEquipo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNombreEquipoKeyTyped(evt);
             }
         });
 
-        javax.swing.GroupLayout panelDetallesEquipoLayout = new javax.swing.GroupLayout(panelDetallesEquipo);
-        panelDetallesEquipo.setLayout(panelDetallesEquipoLayout);
-        panelDetallesEquipoLayout.setHorizontalGroup(
-            panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDetallesEquipoLayout.createSequentialGroup()
-                .addGroup(panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDetallesEquipoLayout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(botonModificarEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDetallesEquipoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(etiquetaModificarEquipo)
-                            .addComponent(etiquetaCiudadEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoCiudadEquipo)
-                            .addComponent(etiquetaDivisionEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboDivisionEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboConferenciaEquipo, 0, 305, Short.MAX_VALUE)
-                            .addComponent(etiquetaConferenciaEquipo)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoNombreEquipo)
+                    .addComponent(campoCiudadEquipo)
+                    .addComponent(comboDivisionEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboConferenciaEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(etiquetaNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoNombreEquipo))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                            .addComponent(etiquetaCiudadEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaDivisionEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaConferenciaEquipo))
+                        .addGap(230, 230, 230)))
+                .addContainerGap())
         );
-        panelDetallesEquipoLayout.setVerticalGroup(
-            panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDetallesEquipoLayout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etiquetaNombreEquipo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(etiquetaCiudadEquipo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoCiudadEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,12 +423,39 @@ public class VentanaControlador extends javax.swing.JFrame {
                 .addComponent(etiquetaConferenciaEquipo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboConferenciaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(etiquetaModificarEquipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonModificarEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap())
         );
+
+        javax.swing.GroupLayout panelDetallesEquipoLayout = new javax.swing.GroupLayout(panelDetallesEquipo);
+        panelDetallesEquipo.setLayout(panelDetallesEquipoLayout);
+        panelDetallesEquipoLayout.setHorizontalGroup(
+            panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesEquipoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelDetallesEquipoLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelDetallesEquipoLayout.setVerticalGroup(
+            panelDetallesEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesEquipoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+        );
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("+");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEquiposLayout = new javax.swing.GroupLayout(panelEquipos);
         panelEquipos.setLayout(panelEquiposLayout);
@@ -375,7 +466,9 @@ public class VentanaControlador extends javax.swing.JFrame {
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addComponent(comboSeleccionConferencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelDetallesEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -383,36 +476,134 @@ public class VentanaControlador extends javax.swing.JFrame {
             panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEquiposLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelDetallesEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEquiposLayout.createSequentialGroup()
+                        .addComponent(panelDetallesEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(panelEquiposLayout.createSequentialGroup()
                         .addComponent(comboSeleccionConferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(panelEquiposLayout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelPestanyas.addTab("tab1", panelEquipos);
 
         panelJugadores.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Busqueda de Jugadores por Equipo");
+        etiquetaBusquedaJugadores.setBackground(new java.awt.Color(255, 255, 255));
+        etiquetaBusquedaJugadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoBuscarJugador.png"))); // NOI18N
+        etiquetaBusquedaJugadores.setFocusable(false);
+
+        panelDatosJugadores.setBackground(new java.awt.Color(255, 255, 255));
+        panelDatosJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Ficha del Jugador"));
+
+        etiquetaPosicionJugador.setText("Posición:");
+
+        comboPosicionJugador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot" }));
+
+        etiquetaPesoJugador.setText("Peso:");
+
+        spinnerPesoJugador.setModel(new javax.swing.SpinnerNumberModel(175, null, null, 1));
+
+        campoFormateadoFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        campoFormateadoFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoFormateadoFechaMouseClicked(evt);
+            }
+        });
+        campoFormateadoFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                campoFormateadoFechaPropertyChange(evt);
+            }
+        });
+
+        etiquetaPesoJugador1.setBackground(new java.awt.Color(255, 255, 255));
+        etiquetaPesoJugador1.setText("Fecha:");
+
+        javax.swing.GroupLayout panelDatosJugadoresLayout = new javax.swing.GroupLayout(panelDatosJugadores);
+        panelDatosJugadores.setLayout(panelDatosJugadoresLayout);
+        panelDatosJugadoresLayout.setHorizontalGroup(
+            panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosJugadoresLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelDatosJugadoresLayout.createSequentialGroup()
+                        .addComponent(etiquetaPosicionJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboPosicionJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatosJugadoresLayout.createSequentialGroup()
+                        .addGroup(panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaPesoJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaPesoJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoFormateadoFecha)
+                            .addComponent(spinnerPesoJugador))))
+                .addContainerGap(521, Short.MAX_VALUE))
+        );
+        panelDatosJugadoresLayout.setVerticalGroup(
+            panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosJugadoresLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaPosicionJugador)
+                    .addComponent(comboPosicionJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaPesoJugador)
+                    .addComponent(spinnerPesoJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(panelDatosJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaPesoJugador1)
+                    .addComponent(campoFormateadoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(183, Short.MAX_VALUE))
+        );
+
+        comboBusquedaJugador.setBackground(new java.awt.Color(255, 255, 255));
+        comboBusquedaJugador.setEditable(true);
+        comboBusquedaJugador.setToolTipText("Seleccione el jugador que desea mostrar");
+        comboBusquedaJugador.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(218, 26, 50)));
+        comboBusquedaJugador.setOpaque(true);
+        comboBusquedaJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBusquedaJugadorActionPerformed(evt);
+            }
+        });
+        comboBusquedaJugador.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                comboBusquedaJugadorPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelJugadoresLayout = new javax.swing.GroupLayout(panelJugadores);
         panelJugadores.setLayout(panelJugadoresLayout);
         panelJugadoresLayout.setHorizontalGroup(
             panelJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelJugadoresLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addContainerGap(618, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(panelJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDatosJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelJugadoresLayout.createSequentialGroup()
+                        .addComponent(etiquetaBusquedaJugadores)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBusquedaJugador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelJugadoresLayout.setVerticalGroup(
             panelJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelJugadoresLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addGroup(panelJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(etiquetaBusquedaJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(comboBusquedaJugador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelDatosJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelPestanyas.addTab("tab2", panelJugadores);
@@ -563,6 +754,10 @@ public class VentanaControlador extends javax.swing.JFrame {
         
         //Desactivar las opciones de actualización
         
+        campoCiudadEquipo.setText("");
+        campoNombreEquipo.setText("");
+        comboDivisionEquipo.setSelectedIndex(-1);
+        
         botonModificarEquipo.setVisible(false);
         etiquetaModificarEquipo.setVisible(false);
         
@@ -589,6 +784,19 @@ public class VentanaControlador extends javax.swing.JFrame {
         //Cargamos los datos de las conferencias y divisiones
         
         comboConferenciaEquipo.setModel(modeloConferenciasEquipo);
+        
+        
+        //Cargamos los datos de lo jugadores
+        
+        DefaultComboBoxModel comboJugadores = new DefaultComboBoxModel();
+        comboJugadores.addElement("Seleccione el jugador a mostrar");
+        
+        for( Jugador j: modelo.getTodosLosJugadores()){
+           comboJugadores.addElement(j.getNombre());
+        }
+       
+        comboBusquedaJugador.setModel(comboJugadores);
+               
     }//GEN-LAST:event_formComponentShown
 
     private void comboSeleccionConferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSeleccionConferenciaActionPerformed
@@ -617,41 +825,105 @@ public class VentanaControlador extends javax.swing.JFrame {
             modeloCombo.addAll(modelo.getDivisionesEste());
             comboDivisionEquipo.setModel(modeloCombo);
         }
-    }//GEN-LAST:event_comboConferenciaEquipoActionPerformed
-
-    private void campoCiudadEquipoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_campoCiudadEquipoPropertyChange
-        // TODO add your handling code here:
         
-    }//GEN-LAST:event_campoCiudadEquipoPropertyChange
+        
+    }//GEN-LAST:event_comboConferenciaEquipoActionPerformed
 
     private void comboDivisionEquipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboDivisionEquipoItemStateChanged
         // TODO add your handling code here:
+        etiquetaModificarEquipo.setVisible(true);
+        botonModificarEquipo.setVisible(true);
         
     }//GEN-LAST:event_comboDivisionEquipoItemStateChanged
 
     private void comboConferenciaEquipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboConferenciaEquipoItemStateChanged
         // TODO add your handling code here:
+        etiquetaModificarEquipo.setVisible(true);
+        botonModificarEquipo.setVisible(true);
+        
         
     }//GEN-LAST:event_comboConferenciaEquipoItemStateChanged
-
-    private void campoCiudadEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCiudadEquipoActionPerformed
-        // TODO add your handling code here:
-//        
-    }//GEN-LAST:event_campoCiudadEquipoActionPerformed
 
     private void botonModificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarEquipoActionPerformed
         // TODO add your handling code here:
         
+        equipoSeleccionadoActual.setCiudad(campoCiudadEquipo.getText());
+        equipoSeleccionadoActual.setNombre(campoNombreEquipo.getText());
+        equipoSeleccionadoActual.setConferencia(comboConferenciaEquipo.getSelectedItem().toString());
+        equipoSeleccionadoActual.setDivision(comboDivisionEquipo.getSelectedItem().toString());
+        try {
+            modelo.updateEquipo(equipoSeleccionadoActual);
+        } catch (DAOEquipoExcepcion ex) {
+            JOptionPane.showMessageDialog(this, "Error: "+ex.getMessage());
+        }
+        this.formComponentShown(new ComponentEvent(this, 1));
+        
+        
     }//GEN-LAST:event_botonModificarEquipoActionPerformed
 
-    private void campoNombreEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreEquipoActionPerformed
+    private void comboBusquedaJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBusquedaJugadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombreEquipoActionPerformed
+        comboBusquedaJugador.removeItem("Seleccione el jugador a mostrar");
+        Set<Jugador> jugador = modelo.getJugador(comboBusquedaJugador.getSelectedItem().toString());
+        if (!jugador.isEmpty()){
+            cargarDatosJugador(jugador.iterator().next());
+        }
+        
+    }//GEN-LAST:event_comboBusquedaJugadorActionPerformed
 
-    private void campoNombreEquipoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_campoNombreEquipoPropertyChange
+    private void campoFormateadoFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoFormateadoFechaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombreEquipoPropertyChange
+        JXDatePicker calendario = new JXDatePicker();
+        calendario.setVisible(true);
+        if (evt.getClickCount()==2){
+            
+            calendario.setVisible(true);
+        }
+    }//GEN-LAST:event_campoFormateadoFechaMouseClicked
 
+    private void campoFormateadoFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_campoFormateadoFechaPropertyChange
+        // TODO add your handling code here:
+        etiquetaModificarEquipo.setVisible(true);
+        botonModificarEquipo.setVisible(true);
+    }//GEN-LAST:event_campoFormateadoFechaPropertyChange
+
+    private void comboBusquedaJugadorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboBusquedaJugadorPropertyChange
+        // TODO add your handling code here:
+        System.out.println("Ha cambiado una propiedad "+evt.getPropertyName());
+        if (evt.getPropertyName().equals("selectedIndex")){
+            System.out.println("Se ha modificado el elemento seleccionado");
+        }
+    }//GEN-LAST:event_comboBusquedaJugadorPropertyChange
+
+    private void campoNombreEquipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreEquipoKeyTyped
+        // TODO add your handling code here:
+        etiquetaModificarEquipo.setVisible(true);
+        botonModificarEquipo.setVisible(true);
+    }//GEN-LAST:event_campoNombreEquipoKeyTyped
+
+    private void campoCiudadEquipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCiudadEquipoKeyTyped
+        // TODO add your handling code here:
+        etiquetaModificarEquipo.setVisible(true);
+        botonModificarEquipo.setVisible(true);
+    }//GEN-LAST:event_campoCiudadEquipoKeyTyped
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        try {
+            // TODO add your handling code here:
+            modelo.cerraConexionHibernate();
+        } catch (DAOConexionExcepcion ex) {
+            System.err.println("No se ha podido cerrar la conexión correctamente");
+        }
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        InsercionEquipos ventanaEquipo = new InsercionEquipos();
+        ventanaEquipo.addWindowListener(this);
+        ventanaEquipo.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -694,23 +966,34 @@ public class VentanaControlador extends javax.swing.JFrame {
     private javax.swing.JButton botonLesionesLateral;
     private javax.swing.JButton botonModificarEquipo;
     private javax.swing.JTextField campoCiudadEquipo;
+    private javax.swing.JFormattedTextField campoFormateadoFecha;
     private javax.swing.JTextField campoNombreEquipo;
+    private javax.swing.JComboBox<String> comboBusquedaJugador;
     private javax.swing.JComboBox<String> comboConferenciaEquipo;
     private javax.swing.JComboBox<String> comboDivisionEquipo;
+    private javax.swing.JComboBox<String> comboPosicionJugador;
     private javax.swing.JComboBox<String> comboSeleccionConferencia;
+    private javax.swing.JLabel etiquetaBusquedaJugadores;
     private javax.swing.JLabel etiquetaCiudadEquipo;
     private javax.swing.JLabel etiquetaConferenciaEquipo;
     private javax.swing.JLabel etiquetaDivisionEquipo;
     private javax.swing.JLabel etiquetaLogotipo;
     private javax.swing.JLabel etiquetaModificarEquipo;
     private javax.swing.JLabel etiquetaNombreEquipo;
+    private javax.swing.JLabel etiquetaPesoJugador;
+    private javax.swing.JLabel etiquetaPesoJugador1;
+    private javax.swing.JLabel etiquetaPosicionJugador;
     private javax.swing.JLabel etiquetaRutaPanelSuperior;
     private javax.swing.JLabel etiquetaTituloPanelSuperio;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> listaConferenciaEquipos;
+    private javax.swing.JPanel panelDatosJugadores;
     private javax.swing.JPanel panelDetallesEquipo;
     private javax.swing.JPanel panelEquipos;
     private javax.swing.JPanel panelFondo;
@@ -718,6 +1001,7 @@ public class VentanaControlador extends javax.swing.JFrame {
     private javax.swing.JPanel panelLateral;
     private javax.swing.JTabbedPane panelPestanyas;
     private javax.swing.JPanel panelSuperior;
+    private javax.swing.JSpinner spinnerPesoJugador;
     // End of variables declaration//GEN-END:variables
     private static final Color colorRojo = Color.decode("#da1a32");
     private static final Color colorAzul = Color.decode("#00438c");
@@ -727,6 +1011,9 @@ public class VentanaControlador extends javax.swing.JFrame {
     
     private Equipo equipoSeleccionadoActual;
     private boolean insercion = false;
+    
+    private JXDatePicker calendario;
+    
 
     //Funciones auxiliares
     
@@ -739,7 +1026,8 @@ public class VentanaControlador extends javax.swing.JFrame {
         TitledBorder bordepanel = new TitledBorder("Datos "+e.getCiudad()+" "+e.getNombre());
         panelDetallesEquipo.setBorder(bordepanel);
         
-        campoCiudadEquipo.setText(e.getNombre());
+        campoNombreEquipo.setText(e.getNombre());
+        campoCiudadEquipo.setText(e.getCiudad());
         comboConferenciaEquipo.setSelectedItem(e.getConferencia());
         
         if(e.getConferencia().equals("Oeste")){
@@ -753,6 +1041,8 @@ public class VentanaControlador extends javax.swing.JFrame {
         }
         
         comboDivisionEquipo.setSelectedItem(e.getDivision());
+        etiquetaModificarEquipo.setVisible(false);
+        botonModificarEquipo.setVisible(false);
         
     }
     
@@ -763,5 +1053,46 @@ public class VentanaControlador extends javax.swing.JFrame {
             return new Equipo(equipoSeleccionadoActual.getId(),campoNombreEquipo.getText(),campoCiudadEquipo.getText(),(String)comboDivisionEquipo.getSelectedItem(),(String)comboConferenciaEquipo.getSelectedItem(),equipoSeleccionadoActual.getEntrenador(),equipoSeleccionadoActual.getJugadores());
         }
         
+    }
+    
+    private void cargarDatosJugador(Jugador j){
+        comboPosicionJugador.setSelectedIndex(j.getPosicion());
+        spinnerPesoJugador.setValue(j.getPeso());
+        
+        campoFormateadoFecha.setValue(java.util.Date.from(j.getFecha_nac().atStartOfDay()
+      .atZone(ZoneId.systemDefault())
+      .toInstant()));
+        
+        
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        formComponentShown(new java.awt.event.ComponentEvent(this, 1));
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
     }
 }

@@ -11,7 +11,7 @@
         <property name="nombre" type="string" column="nombre"/>
         <property name="posicion" type="int" column="posicion"/>
         <property name="peso" type="double" column="peso"/>
-        <property name="fecha_nac" type="java.util.Date" column="fecha_nac"/>
+        <property name="fecha_nac" type="java.time.LocalDate" column="fecha_nac"/>
         
         <many-to-one name="equipo" class="es.iespacomolla.ad.hibernateaccesodatos.Equipo" column="codigo_eq_jug" not-null="true"/>
         
