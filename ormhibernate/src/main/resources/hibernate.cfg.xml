@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:49161:xe</property>
+        <property name="hibernate.connection.username">miguel</property>
+        <property name="hibernate.connection.password">leugim</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
+
+        <mapping resource="Equipo.hbm.xml" />
+        <mapping resource="Jugador.hbm.xml" />
+        <mapping resource="Lesion.hbm.xml" />
+        <mapping resource="Entrenador.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

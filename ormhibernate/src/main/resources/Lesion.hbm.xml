@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="es.iespacomolla.ad.hibernateaccesodatos.Lesion" table="lesion">
+        <id name="id" type="int" column="codigo_les">
+            <generator class="assigned"/>
+        </id>
+        
+        <property name="nombre" type="string" column="nombre"/>
+        <property name="tiempo_rec" type="int" column="tiempo_rec"/>
+        
+        <set name="lesionados" cascade="save-update" table="jugador_lesion">
+            <key column="codigo_les_jl"/>
+            <many-to-many class="es.iespacomolla.ad.hibernateaccesodatos.Jugador" column="codigo_jug_jl"/>
+            
+        </set>
+        
+    </class>
+
+
+
+
+
+
+
+
+</hibernate-mapping>
