@@ -5,6 +5,7 @@
  */
 package es.iespacomolla.ad.accesodatos;
 
+import es.iespacomolla.ad.exceptions.DAOConexionExcepcion;
 import es.iespacomolla.ad.exceptions.DAOEntrenadorExcepcion;
 import es.iespacomolla.ad.exceptions.DAOEquipoExcepcion;
 import es.iespacomolla.ad.exceptions.DAOJugadorExcepcion;
@@ -13,7 +14,15 @@ import es.iespacomolla.ad.hibernateaccesodatos.Entrenador;
 import es.iespacomolla.ad.hibernateaccesodatos.Equipo;
 import es.iespacomolla.ad.hibernateaccesodatos.Jugador;
 import es.iespacomolla.ad.hibernateaccesodatos.Lesion;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -22,25 +31,70 @@ import java.util.Set;
 public class DAOImplementacionObjectDB implements DAO{
     
     
+    private EntityManagerFactory emf;
+    private EntityManager em;
+
+    public DAOImplementacionObjectDB() {
+        try {
+            crearConexionObjectDB();
+        } catch (DAOConexionExcepcion ex) {
+            System.err.println("No se ha podido conectar a la base de datos ObjectDB");
+        }
+        
+    }
+    
+    
+    
+    
+    private void crearConexionObjectDB() throws DAOConexionExcepcion{
+        
+        emf= Persistence.createEntityManagerFactory("objectdb:db/nba.odb");
+        em= emf.createEntityManager();
+        
+        if (em==null){
+            throw new DAOConexionExcepcion("No se ha conectado a Hibernate");
+        }
+    }
+    
+    public void cerraConexionHibernate() throws DAOConexionExcepcion{
+        
+        em.close();
+        emf.close();
+        
+        if (em!=null)
+            throw new DAOConexionExcepcion("No se ha podido cerrar la conexión con Hibernate.");
+        
+    }
 
     @Override
     public int getIdInsertarEquipo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Integer> q = em.createQuery("SELECT max(e.id) from Equipo e",Integer.class);
+        
+        return q.getSingleResult()+1;
+        
     }
 
     @Override
     public Equipo getEquipo(int id) throws DAOEquipoExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Equipo> query = em.createQuery("SELECT e FROM Equipo e WHERE id=:parametroidequipo", Equipo.class);
+        
+        query.setParameter("parametroidequipo", id);
+        
+        return query.getSingleResult();
     }
 
     @Override
     public Set<Equipo> getEquiposCiudad(String nombreCiudad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Equipo> query  = em.createQuery("SELECT e FROM Equipo e WHERE ciudad=:parametroCiudad",Equipo.class);
+        query.setParameter("parametroCiudad", nombreCiudad);
+        return new HashSet<Equipo>(query.getResultList());
     }
 
     @Override
     public Equipo getEquipoPorNombre(String nombreEquipo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Equipo> query  = em.createQuery("SELECT e FROM Equipo e WHERE nombre=:parametroNombre",Equipo.class);
+        query.setParameter("parametroNombre", nombreEquipo);
+        return query.getSingleResult();
     }
 
     @Override
