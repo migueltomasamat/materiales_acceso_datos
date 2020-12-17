@@ -1,0 +1,24 @@
+{
+  "lista": [
+    {
+      "nombre": "Manuel Pérez",
+      "edad": 18,
+      "altura": 1.85
+    },
+    {
+      "nombre": "Sonia Candela",
+      "edad": 18,
+      "altura": 1.76
+    },
+    {
+      "nombre": "Raquel Correa",
+      "edad": 18,
+      "altura": 1.56
+    },
+    {
+      "nombre": "Luis Gómez",
+      "edad": 18,
+      "altura": 1.98
+    }
+  ]
+}
